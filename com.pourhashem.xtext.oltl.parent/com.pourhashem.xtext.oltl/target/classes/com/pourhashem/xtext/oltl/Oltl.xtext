@@ -1,0 +1,66 @@
+
+/**
+ * @author Mohammad Mehdi Pourhashem Kallehbasti
+ */
+ 
+grammar com.pourhashem.xtext.oltl.Oltl with org.eclipse.xtext.common.Terminals
+
+generate oltl "http://www.pourhashem.com/xtext/oltl/Oltl"
+
+Model:
+	'Bound:' bound=INT
+	('SoftBound:' softBound=INT)?
+	'Formula:' tempFormula=TempFormula
+	 ('SoftFormulae:' softFormulae+=SoftFormula*)?
+;
+
+SoftFormula:
+	softAll=SoftAllTI | softAt=SoftTI
+;
+
+SoftAllTI:
+	'(' 'soft' ap=AP id=ID? weight=Weight ')'
+;
+
+
+SoftTI:
+	'(' 'soft' '(' '@' ap=AP ti=INT')' id=ID? weight=Weight ')'
+;
+
+Weight:
+	(wInt=WInt) | (wFloat=WFloat)
+;
+
+WInt:
+	int=INT
+;
+
+WFloat:
+	int1=INT '.' int2=INT
+;
+
+TempFormula:
+	ap=AP
+	| ('(' '&&' fa+=TempFormula+ ')' )
+	| ('(' '||' fo+=TempFormula+ ')' )
+	| ('(' '!!' fnot=TempFormula')' )
+	| ('(' op2=OP2 f1=TempFormula f2=TempFormula ')' )
+	| ('(' opf=OPF f=TempFormula ')' )
+//	| (opfn=OPFN f1=TempFormula i=INT ) 
+;
+
+terminal OP2: //Propositional operators with 2 operands
+	'->' | '<->' | 'until' | 'since' | 'release' | 'trigger'
+;
+
+terminal OPF: //Temporal operators with 1 operands
+	'next' | 'yesterday' | 'alw' | 'som' | 'alwf' | 'somf' | 'alwp' | 'somp'
+;
+
+//terminal OPFN: //Temporal operators with 1 formula operand and a number
+//	'futr' | 'past' | 'withinf' | 'withinp' | 'lasts' | 'lasted'
+//;
+
+AP:
+	'(' '-' ('P' | 'p') '-' name=ID ')'
+;

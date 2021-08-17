@@ -1,0 +1,6 @@
+Bound: 2
+SoftBound: 2
+Formula:
+(!! (&& (-P- a) (next (-p- b))))
+SoftFormulae:
+(soft (@ (-p- b) 1) 2.6) (soft (-P- a) 2.5)
