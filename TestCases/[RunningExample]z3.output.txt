@@ -1,0 +1,109 @@
+sat
+(
+  (define-fun a () (_ BitVec 4)
+    #xe)
+  (define-fun i_loop () (_ BitVec 4)
+    #x1)
+  (define-fun b () (_ BitVec 4)
+    #xe)
+  (define-fun oltl0 () (_ BitVec 4)
+    #xf)
+  (define-fun oltl2 () (_ BitVec 4)
+    #x1)
+  (define-fun oltl1 () (_ BitVec 4)
+    #xe)
+  (define-fun in_loop () (_ BitVec 4)
+    #xe)
+  (define-fun bvimpl ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) (_ BitVec 4)
+    (bvor (bvnot x!1) x!0))
+  (define-fun bviff ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) (_ BitVec 4)
+    (bvnot (bvxor x!1 x!0)))
+  (define-fun somf ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (let ((a!1 (or (= ((_ extract 3 3) x!1) #b0)
+                   (= (bvredor ((_ extract 2 1) x!0)) #b1))))
+      (and (= ((_ extract 2 0) x!1)
+              (bvor ((_ extract 2 0) x!0) ((_ extract 3 1) x!1)))
+           (or (= ((_ extract 3 3) x!0) #b0) (= ((_ extract 3 3) x!1) #b1))
+           a!1)))
+  (define-fun somp ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (and (= ((_ extract 0 0) x!1) ((_ extract 0 0) x!0))
+         (= ((_ extract 3 1) x!1)
+            (bvor ((_ extract 3 1) x!0) ((_ extract 2 0) x!1)))))
+  (define-fun alwp ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (let ((a!1 (= (bvnot ((_ extract 3 1) x!1))
+                  (bvor (bvnot ((_ extract 3 1) x!0))
+                        (bvnot ((_ extract 2 0) x!1))))))
+      (and (= (bvnot ((_ extract 0 0) x!1)) (bvnot ((_ extract 0 0) x!0))) a!1)))
+  (define-fun alwf ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (let ((a!1 (= (bvnot ((_ extract 2 0) x!1))
+                  (bvor (bvnot ((_ extract 2 0) x!0))
+                        (bvnot ((_ extract 3 1) x!1)))))
+          (a!2 (= (bvredor (bvnot ((_ extract 2 1) x!0))) #b1)))
+      (and a!1
+           (or (= ((_ extract 3 3) x!0) #b1) (= ((_ extract 3 3) x!1) #b0))
+           (or (= ((_ extract 3 3) x!1) #b1) a!2))))
+  (define-fun som ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (= x!1 (concat (bvredor x!0) (bvredor x!0) (bvredor x!0) (bvredor x!0))))
+  (define-fun alw ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (= x!1 (concat (bvredand x!0) (bvredand x!0) (bvredand x!0) (bvredand x!0))))
+  (define-fun trigger ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4)) (x!2 (_ BitVec 4))) Bool
+    (let ((a!1 (bvor (bvnot ((_ extract 3 1) x!0))
+                     (bvnot (bvor ((_ extract 3 1) x!1) ((_ extract 2 0) x!2))))))
+      (and (= (bvnot ((_ extract 0 0) x!2)) (bvnot ((_ extract 0 0) x!0)))
+           (= (bvnot ((_ extract 3 1) x!2)) a!1))))
+  (define-fun since ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4)) (x!2 (_ BitVec 4))) Bool
+    (let ((a!1 (bvnot (bvor (bvnot ((_ extract 3 1) x!1))
+                            (bvnot ((_ extract 2 0) x!2))))))
+      (and (= ((_ extract 0 0) x!2) ((_ extract 0 0) x!0))
+           (= ((_ extract 3 1) x!2) (bvor ((_ extract 3 1) x!0) a!1)))))
+  (define-fun release ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4)) (x!2 (_ BitVec 4))) Bool
+    (let ((a!1 (bvor (bvnot ((_ extract 2 0) x!0))
+                     (bvnot (bvor ((_ extract 2 0) x!1) ((_ extract 3 1) x!2)))))
+          (a!2 (= (bvredor (bvnot ((_ extract 2 1) x!0))) #b1)))
+      (and (= (bvnot ((_ extract 2 0) x!2)) a!1)
+           (or (= ((_ extract 3 3) x!1) #b0)
+               (= ((_ extract 3 3) x!0) #b0)
+               (= ((_ extract 3 3) x!2) #b1))
+           (or (= ((_ extract 3 3) x!0) #b1) (= ((_ extract 3 3) x!2) #b0))
+           (or (= ((_ extract 3 3) x!2) #b1) a!2))))
+  (define-fun until ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4)) (x!2 (_ BitVec 4))) Bool
+    (let ((a!1 (bvnot (bvor (bvnot ((_ extract 2 0) x!1))
+                            (bvnot ((_ extract 3 1) x!2)))))
+          (a!2 (or (= ((_ extract 3 3) x!2) #b0)
+                   (= (bvredor ((_ extract 2 1) x!0)) #b1))))
+      (and (= ((_ extract 2 0) x!2) (bvor ((_ extract 2 0) x!0) a!1))
+           (or (= ((_ extract 3 3) x!0) #b1)
+               (= ((_ extract 3 3) x!1) #b1)
+               (= ((_ extract 3 3) x!2) #b0))
+           (or (= ((_ extract 3 3) x!0) #b0) (= ((_ extract 3 3) x!2) #b1))
+           a!2)))
+  (define-fun zeta ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (= x!1 (concat ((_ extract 2 0) x!0) #b1)))
+  (define-fun yesterday ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (= x!1 (concat ((_ extract 2 0) x!0) #b0)))
+  (define-fun next ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) Bool
+    (= ((_ extract 2 0) x!1) ((_ extract 3 1) x!0)))
+  (define-fun loopConF ((x!0 (_ BitVec 4))) Bool
+    (= ((_ extract 1 1) x!0) ((_ extract 3 3) x!0)))
+  (define-fun getbit ((x!0 (_ BitVec 4)) (x!1 (_ BitVec 4))) (_ BitVec 1)
+    ((_ extract 0 0) (bvlshr x!1 x!0)))
+)
+(objectives
+ ( 2.5)
+)
+(:eliminated-vars       3
+ :max-memory            6.46
+ :memory                6.42
+ :num-allocs            58806
+ :rlimit-count          6472
+ :sat-backjumps         2
+ :sat-conflicts         2
+ :sat-decisions         20
+ :sat-mk-clause-2ary    57
+ :sat-mk-clause-3ary    104
+ :sat-mk-var            51
+ :sat-propagations-2ary 66
+ :sat-propagations-3ary 66
+ :sat-units             5
+ :time                  0.09
+ :total-time            0.05)

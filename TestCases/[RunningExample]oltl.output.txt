@@ -1,0 +1,15 @@
+--- time 0 ---
+--- time 1 ---
+*LOOP*
+a
+b
+--- time 2 ---
+a
+b
+
+Total cost: 2.5
+
+
+Violated soft constraints:
+
+"a" is violated at time instant(s) 0 with the total cost of [2.5].

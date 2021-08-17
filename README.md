@@ -1,5 +1,5 @@
 # LiTeLLab
-The jar file can be executed by the command "java -jar litellab Path_to_the_OLTL_script.txt". This runs the OLTL specification written in the file.
+The jar file can be executed by the command "java -jar oltl/litellab Path_to_the_OLTL_script.txt". This runs the OLTL specification written in the file.
 
 Alternatively, any of two case studies ("exam" and "or") can be executed by giving the case study name instead of file path.
 
