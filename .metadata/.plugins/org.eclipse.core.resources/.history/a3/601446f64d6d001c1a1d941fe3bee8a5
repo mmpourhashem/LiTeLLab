@@ -1,0 +1,668 @@
+/**
+ * @author Mohammad Mehdi Pourhashem Kallehbasti
+ */
+
+package uniTimeTabling;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.NClob;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Arrays;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import com.pourhashem.oltl.oltl.Bitvector;
+
+import aceTooltl.JavaMethods;
+import aceTooltl.QLMethodSignature;
+import aceTooltl.QLType;
+import aceTooltl.Query;
+import aceTooltl.RuleManager;
+import xmlTodrs.DRS;
+import xmlTodrs.Parser;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import org.apache.poi.ss.usermodel.Cell;
+
+public final class Util {
+	public static String xmlFileName = "ape.output.xml";
+	public static int counterForID = 0;
+
+	public static String getCounterForID() {
+		return "QL" + ++counterForID;
+	}
+
+	public static String aceToApeParaphrasedAce(String input, String fileName) {
+		try {
+			//			input = input.replaceAll("\n+", "\n");
+			//			input = input.replaceAll("\\.( |\n)", ". \n\n");
+			URL website;
+			//	website = new URL("http://attempto.ifi.uzh.ch/ws/ape/apews.perl?text=Every%20man%20is%20a%20human.&solo=drsxml");
+			website = new URL(paraphraseUrlBuilder(input));
+			System.out.println(website);
+
+			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+			FileOutputStream fos = new FileOutputStream(fileName);
+			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+			fos.close();
+			return new String(Files.readAllBytes(Paths.get(fileName)));
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static void aceToDrsXml(String input, String fileName) {
+		try {
+			//			input = input.replaceAll("\\n(\n)+", "\n");
+			//			input = input.replaceAll("\\.\n", ". \n\n");
+			URL website;
+			//	website = new URL("http://attempto.ifi.uzh.ch/ws/ape/apews.perl?text=Every%20man%20is%20a%20human.&solo=drsxml");
+			website = new URL(urlBuilder(input));
+
+			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+			FileOutputStream fos = new FileOutputStream(fileName);
+			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+			fos.close();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// aceToDrsXml
+	private static String urlBuilder(String ace){
+		//		String result = "http://attempto.ifi.uzh.ch/ws/ape/apews.perl?text=" + ace + "&solo=drsxml&guess=on&noclex=on";//without clex
+		String result = "http://attempto.ifi.uzh.ch/ws/ape/apews.perl?text=" + ace + "&solo=drsxml&guess=on"; //with clex
+		//		System.out.println(result);
+		result = result.replaceAll("\n", "%0D%0A");
+		return result.replaceAll(" ","%20");
+	}
+
+	// aceToDrsXml
+	private static String paraphraseUrlBuilder(String ace){
+		//		String result = "http://attempto.ifi.uzh.ch/ws/ape/apews.perl?text=" + ace + "&solo=drsxml&guess=on&noclex=on&cparaphrase=on";//without clex
+		String result = "http://attempto.ifi.uzh.ch/ws/ape/apews.perl?text=" + ace + "&guess=on&cparaphrase=on"; //with clex
+		//		System.out.println(result);
+		result = result.replaceAll("\n", "%0D%0A");
+		return result.replaceAll(" ","%20");
+	}
+
+	public String preprocess(String input) {
+		String result;
+		//		System.out.println(input);
+		result = keywordPreprocess(input);
+		//		result = result.replace(".", ".\n");
+		result = result.replace("\n ", "\n");
+		return result;
+	}
+
+	// preprocess
+	private static String keywordPreprocess(String input) {
+		String result = "";
+		input = input.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?:#.*)","");//Remove all comments.
+
+		String[] words;
+		words = input.split("\\s+");
+		String processedWord = "";
+		boolean hasDot = false;
+		int jump = 0;
+		boolean quoted = true;
+		for (int i = 0; i < words.length; 
+				//				result += processedWord + ((! quoted && words[i].contains(".")) ? "." : "") + " ", 
+				//						i += 1 + jump) {
+				result += processedWord + " ",
+						i += 1 + jump) {
+			jump = 0;
+			String word = words[i];
+			quoted = true;
+			if (! word.contains("\"")) {
+				word = word.toLowerCase();
+				//				if (! isFloat(word))
+				//					word = word.replaceAll("\\.", "");
+				quoted = false;
+			}
+			hasDot = word.contains(".");
+			//<3 words> 
+			if (i < words.length - 2) {//3 credit course => threeCreditCourse
+				if ((word.equals("1") || word.equals("2") || word.equals("3") || word.equals("4")) && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("credit") && words[i + 2].replaceAll("\\.", "").equalsIgnoreCase("courses")) {
+					processedWord = "CreditCourses" + (words[i + 2].contains(".") ? "." : "");
+					int n = Integer.parseInt(word);
+					String sn = "";
+					if (n == 1)
+						sn = "one";
+					if (n == 2)
+						sn = "two";
+					if (n == 3)
+						sn = "three";
+					if (n == 4)
+						sn = "four";
+					processedWord = sn + processedWord;
+					jump = 2;
+					continue;
+				}
+			}
+			if (i < words.length - 2) {//non faculty members => NonFacultyMembers
+				if (word.equalsIgnoreCase("non") && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("faculty") && words[i + 2].replaceAll("\\.", "").equalsIgnoreCase("members")) {
+					processedWord = "NonFacultyMembers" + (words[i + 2].contains(".") ? "." : "");
+					jump = 2;
+					continue;
+				}
+			}
+			if (i < words.length - 2) {//cost of 1
+				if (word.equalsIgnoreCase("cost") && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("of") && words[i + 2].replaceAll("\\.", "").equalsIgnoreCase("1")) {
+					processedWord = "cost of 1.0" + (words[i + 2].contains(".") ? "." : "");
+					jump = 2;
+					continue;
+				}
+			}
+			//</3 words>
+			//<2 words>
+			if (i < words.length - 1) {
+				if (word.equalsIgnoreCase("time") && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("slots")) {
+					processedWord = "timeslots" + (words[i + 1].contains(".") ? "." : "");
+					jump = 1;
+					continue;
+				}
+			}
+			if (i < words.length - 1) {
+				if (word.equalsIgnoreCase("time") && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("slot")) {
+					processedWord = "timeslot" + (words[i + 1].contains(".") ? "." : "");
+					jump = 1;
+					continue;
+				}
+			}
+			if (i < words.length - 1) {
+				if (word.equalsIgnoreCase("faculty") && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("members")) {
+					processedWord = "FacultyMembers" + (words[i + 1].contains(".") ? "." : "");
+					jump = 1;
+					continue;
+				}
+			}
+			if (i < words.length - 1) {
+				if (word.equalsIgnoreCase("non-faculty") && words[i + 1].replaceAll("\\.", "").equalsIgnoreCase("members")) {
+					processedWord = "NonFacultyMembers" + (words[i + 1].contains(".") ? "." : "");
+					jump = 1;
+					continue;
+				}
+			}
+			//<2 words>
+
+
+			//			if (! quoted)
+			//				processedWord = words[i].replaceAll("\\.", "");
+			//			else
+			processedWord = words[i];			
+			//			if (i > 0 && words[i - 1].equals("QL,") && words[i].equals("find"))
+			//				processedWord += " find and";
+		}
+		if (result.endsWith(" "))
+			result = result.substring(0, result.length() - 1);
+
+		return result;
+	}
+
+	//	private static boolean isFloat(String word) {//recognizes {1.3} as a float
+	//		for (int i = 1; i < word.length() - 1; i++)
+	//			if (! (word.charAt(i) == '.' || (word.charAt(i) >= '0' && word.charAt(i) <= '9')))
+	//				return false;
+	//		return true;
+	//	}
+
+	private static ArrayList<String> getKeywordsAllSynonyms(String input) {
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(input);
+		if (input.equals("bitwiseExpr")) {
+			result.add("bitwise expression");
+			result.add("bitwise expr");
+		}
+
+		return result;
+	}
+
+	private static String keywordPostprocess(String input) {
+		/* 1. find all words whose initial letter is uppercase.
+		 * 2. convert the initial letter to lower case. 
+		 * 3. revert the change after producing the query.
+		 */
+		return null;
+	}
+
+	public static boolean isKeyword(String language, String input) {
+		if (language.equals("java")) {
+			for (QLType qlType: QLType.values())
+				if (input.equals(qlType.toString()))
+					return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isParenthesized(String input) {
+		if (input.charAt(0) != '(' || input.charAt(input.length() - 1) != ')')
+			return false;
+
+		int counter = 0;
+		for (int i = 1; i < input.length() - 1; i++) {
+			char ch = input.charAt(i);
+			if (ch == '(')
+				counter++;
+			else if (ch == ')')
+				counter--;
+			if (counter < 0)
+				return false;
+		}
+
+		return true;
+	}
+
+	/*
+	 Return the method name when applicable without any casting.
+	 */
+	public QLMethodSignature getQLMethodSignature(QLType qlType, String hint) {
+		for (QLMethodSignature qlms: new JavaMethods().getMethods())
+			if (qlms.getReceiver().equals(qlType) && qlms.getHints().contains(hint.toLowerCase()))
+				return qlms;
+		return null;
+	}
+
+	public int ordinalToCardinal(String ord) {
+		return ordinalToIndex(ord) + 1;
+	}
+
+	public int ordinalToIndex(String ord) {
+		ord = ord.toLowerCase();
+		if (ord.equals("first"))
+			return 0;
+		if (ord.equals("second"))
+			return 1;
+		if (ord.equals("third"))
+			return 2;
+		if (ord.equals("fourth"))
+			return 3;
+		if (ord.equals("fifth"))
+			return 4;
+		if (ord.equals("sixth"))
+			return 5;
+		if (ord.equals("seventh"))
+			return 6;
+		if (ord.equals("eighth"))
+			return 7;
+		if (ord.equals("ninth"))
+			return 8;
+		if (ord.equals("tenth"))
+			return 9;
+		if (ord.equals("eleventh"))
+			return 10;
+		if (ord.equals("twelfth"))
+			return 11;
+		if (ord.equals("thirteenth"))
+			return 12;
+		if (ord.equals("fourteenth"))
+			return 13;
+		if (ord.equals("fifteenth"))
+			return 14;
+		if (ord.equals("sixteenth"))
+			return 15;
+		if (ord.equals("seventeenth"))
+			return 16;
+		if (ord.equals("eighteenth"))
+			return 17;
+		if (ord.equals("nineteenth"))
+			return 18;
+		if (ord.equals("twentieth"))
+			return 19;
+
+		return -1;
+
+	}
+
+	public int cardinalToIndex(String ord) {
+		ord = ord.toLowerCase();
+		if (ord.equals("one"))
+			return 1;
+		if (ord.equals("two"))
+			return 2;
+		if (ord.equals("three"))
+			return 3;
+		if (ord.equals("four"))
+			return 4;
+		if (ord.equals("five"))
+			return 5;
+		if (ord.equals("six"))
+			return 6;
+		if (ord.equals("seven"))
+			return 7;
+		if (ord.equals("eight"))
+			return 8;
+		if (ord.equals("nine"))
+			return 9;
+		if (ord.equals("ten"))
+			return 10;
+		if (ord.equals("eleven"))
+			return 11;
+		if (ord.equals("twelve"))
+			return 12;
+		if (ord.equals("thirteen"))
+			return 13;
+		if (ord.equals("fourteen"))
+			return 14;
+		if (ord.equals("fifteen"))
+			return 15;
+		if (ord.equals("sixteen"))
+			return 16;
+		if (ord.equals("seventeen"))
+			return 17;
+		if (ord.equals("eighteen"))
+			return 18;
+		if (ord.equals("nineteen"))
+			return 19;
+		if (ord.equals("twenty"))
+			return 20;
+
+		return -1;
+	}
+
+	String removeDoubleQuote(String input) {
+		if (input.startsWith("\"") && input.endsWith("\""))
+			input = input.substring(1, input.length() - 1);
+		return input;
+	}
+
+	//ACE -> ACE that is paraphrased by APE -> ACE that is paraphrased bye aceToQl
+	public static DRS getRootDrs(String input) {
+		//Write apeParaphrasedAce to the xml file.
+		Util.aceToApeParaphrasedAce(input, xmlFileName);
+
+		//Fetch the value of the <paraphrase> tag in the xml file.
+		String apeParaphrasedAce = new Parser().readApeParaphrase(xmlFileName);
+		System.out.println("\nparaphrased by APE:\n" + apeParaphrasedAce);
+
+		//Write DrsXml of the apeParaphrasedAce in the xmlFileName.
+		Util.aceToDrsXml(apeParaphrasedAce, xmlFileName);
+
+		DRS tmpDrs = new Parser().parse(xmlFileName);
+		RuleManager ruleManager = new RuleManager(tmpDrs);
+		Query tmpQuery = ruleManager.applyPreParaphraseRules(tmpDrs);
+
+		//Fetch aceToQlParaphrased, that is expanded version of first input with some ingored sentids. 
+		String aceToQlParaphrased = ruleManager.paraphrase(apeParaphrasedAce, tmpQuery);
+		System.out.println("\nparaphrased by our tool:\n" + aceToQlParaphrased + "\n");
+
+		//Write DrsXml of aceToQlParaphrased in the xmlFileName. 
+		Util.aceToDrsXml(aceToQlParaphrased, xmlFileName);
+
+		//Return the final root DRS.
+		return new Parser().parse(xmlFileName);
+	}
+
+	public static DRS getRootDrs() {
+		return new Parser().parse(xmlFileName);
+	}
+
+	//	void checkNull(ArrayList<Integer> array, int index) {
+	//		if (index >= array.size())
+	//			for (int i = array.size(); i <= index; i++)
+	//				array.add(-1);
+	//	}
+	//	
+	//	void checkNullBoolean(ArrayList<Boolean> array, int index) {
+	//		if (index >= array.size())
+	//			for (int i = array.size(); i <= index; i++)
+	//				array.add(false);
+	//	}
+	//
+	//	void checkNullFloat(ArrayList<Float> array, int index) {
+	//		if (index >= array.size())
+	//			for (int i = array.size(); i <= index; i++)
+	//				array.add((float) 0);
+	//	}
+	//	
+	//	void checkNullPIndex(ArrayList<ArrayList<Integer>> coursesTaughtByWhom, int pIndex) {
+	//		if (pIndex >= coursesTaughtByWhom.size())
+	//			for (int index = coursesTaughtByWhom.size(); index <= pIndex; index++)
+	//				coursesTaughtByWhom.add(new ArrayList<Integer>());
+	//	}
+	//
+	//	void checkNullPIndexFloat(ArrayList<ArrayList<Float>> coursesTaughtByWhom, int pIndex) {
+	//		if (pIndex >= coursesTaughtByWhom.size())
+	//			for (int index = coursesTaughtByWhom.size(); index <= pIndex; index++)
+	//				coursesTaughtByWhom.add(new ArrayList<Float>());
+	//	}
+	//
+	//	void checkNull(ArrayList<ArrayList<ArrayList<Integer>>> fields, int fieldIndex, int semesterIndex) {
+	//		if (fieldIndex >= fields.size())
+	//			for (int index = fields.size(); index <= fieldIndex; index++)
+	//				fields.add(new ArrayList<ArrayList<Integer>>());
+	//		if (semesterIndex >= fields.get(fieldIndex).size())
+	//			for (int index = fields.get(fieldIndex).size(); index <= semesterIndex; index++)
+	//				fields.get(fieldIndex).add(new ArrayList<Integer>());
+	//	}
+	//
+	//	void checkNullFloat(ArrayList<ArrayList<ArrayList<Float>>> profsPreferNotToTeachWhen, int pIndex, int day, int timeSlot) {
+	//		if (pIndex >= profsPreferNotToTeachWhen.size())
+	//			for (int index = profsPreferNotToTeachWhen.size(); index <= pIndex; index++)
+	//				profsPreferNotToTeachWhen.add(new ArrayList<ArrayList<Float>>());
+	//		if (day >= profsPreferNotToTeachWhen.get(pIndex).size())
+	//			for (int index = profsPreferNotToTeachWhen.get(pIndex).size(); index <= day; index++)
+	//				profsPreferNotToTeachWhen.get(pIndex).add(new ArrayList<Float>());
+	//		if (timeSlot >= profsPreferNotToTeachWhen.get(pIndex).get(day).size())
+	//			for (int index = profsPreferNotToTeachWhen.get(pIndex).get(day).size(); index <= timeSlot; index++)
+	//				profsPreferNotToTeachWhen.get(pIndex).get(day).add((float) 0);
+	//	}
+
+	boolean isNameOfADay(String day) {
+		for (DayOfWeek dayOfWeek : DayOfWeek.values())
+			if (day.equalsIgnoreCase(dayOfWeek.toString()))
+				return true;
+		return false;
+	}
+
+	int dayToInt(String day) {
+		for (DayOfWeek dayOfWeek : DayOfWeek.values())
+			if (day.equalsIgnoreCase(dayOfWeek.toString()))
+				return dayOfWeek.getValue();
+		return 0;
+	}
+
+	int dayToInt(String day, int weekStart) {
+		return (dayToInt(day) - weekStart + 7) % 7 + 1;
+	}
+
+	public int numRelToInt(String numrelS) {
+		if (numrelS.equals("eq"))
+			return 0;
+		if (numrelS.equals("leq"))//at most
+			return -1;
+		if (numrelS.equals("geq"))//at least
+			return 1;
+
+		return -11;
+	}
+
+	public static void writeToExcel(String excelFilePath, int bound, int nClasses, int nLabs, ArrayList<Bitvector> rows, ArrayList<String> profsName, ArrayList<String> coursesName, ArrayList<Integer> practicalCourses, ArrayList<Integer> externalCourses) {
+		try {
+			int rowPerDay = nClasses + nLabs;
+			boolean rightToLeft = true;
+			FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
+			Workbook workbook = WorkbookFactory.create(inputStream);
+			ArrayList<ArrayList<String>> scheduledCourses = new ArrayList<ArrayList<String>>(); scheduledCourses.add(null);  	//from 1 to 25
+			ArrayList<ArrayList<String>> scheduledLabs = new ArrayList<ArrayList<String>>(); scheduledLabs.add(null); 		//from 1 to 25
+			Sheet sheet = workbook.getSheetAt(0);
+			clearUniTTTable(sheet, rowPerDay);
+			ArrayList<String> coursesPersianName = new ArrayList(Arrays.asList("33-مدارهای الکتریکی", "60-مهندسی نرم افزار", "55-مباحث ویژه۱", "66-شبکه های کامپیوتری", "22-برنامه سازی پیشرفته", "58-پایگاه داده ها", "55-سیستم های عامل", "77-مبانی بینائی کامپیوتر", "87-انتقال داده ها", "33-مدارهای منطقی", "22-ریاضیات گسسته", "06-سیستم های کنترل خطی", "44-روش پژوهش و ارائه", "66-مبانی هوش محاسباتی", "11-مبانی کامپیوتر و برنامه سازی", "44-معماری کامپیوتر", "06-الکترونیک دیجیتال", "33-زبان تخصصی", "77-اصول رباتیکز", "44-سیگنال ها و سیستم ها", "70-مهندسی اینترنت", "67-اصول طراحی کامپایلر", "88-مبانی پردازش زبان و گفتار", "50-تحلیل و طراحی سیستم ها", "44-طراحی الگوریتم ها", "55-ریزپردازنده و زبان اسمبلی", "33-ساختمان داده ها", "75-طراحی کام.س.دیجیتال", "70-طراحی زبان های برنامه سازی", "66-هوش مصنوعی و سیستم های خبره", "44-نظریه زبان ها و ماشین ها", "06-آز. مدارهای الکترونیکی", "08-آز.ابزارهای طراحی با کمک کام.", "88-آز. اصول رباتیکز", "22-کارگاه کامپیوتر", "88-کارگاه متلب", "77-آز. شبکه های کامپیوتری", "66-آز. ریزپردازنده", "07-آز. الکترونیک دیجیتال", "07-آز. سیستم های کنترل خطی", "55-آز. مدارهای منطقی و معماری", "67-آز. سیستم های عامل", "88-آز. مدارهای الکتریکی", "77-آز. پایگاه داده", "11-ریاضی ۱", "22-ریاضی ۲", "11-فیزیک ۱", "22-فیزیک ۲", "22-معادلات دیفرانسیل", "33-آمار مهندسی و احتمالات", "33-ریاضیات مهندسی", "زبان انگلیسی-11", "تفسیر موضوعی قرآن-11", "شبکه های عصبی-2", "رایانش تکاملی-1", "شناسایی الگو-2", "تصویرپردازی رقمی-2", "مباحث ویژه ۱ در هوش مصنوعی-2"));
+			ArrayList<String> coursesEnglishName = new ArrayList(Arrays.asList("EcC-33", "SE-60", "ST1-55", "CN-66", "AP-22", "DB-58", "OS-55", "FCV-77", "DT-87", "LC-33", "DM-22", "LCS-06", "MRP-44", "FCI-66", "FCP-11", "CA-44", "DE-06", "TE-33", "PR-77", "SS-44", "IE-70", "PCD-67", "NLP-88", "ADS-50", "AD-44", "MP-55", "DS-33", "CDES-75", "DPL-70", "AI-66", "TLA-44", "L-EnC-06", "L-CADT-08", "L-PR-88", "L-CL-22", "L-MW-88", "L-CN-77", "L-MP-66", "L-DE-07", "L-LCS-07", "L-LCCA-55", "L-OS-67", "L-EcC-88", "L-DB-77", "M1-11", "M2-22", "P1-11", "P2-22", "DES-22", "ESP-33", "EM-33", "EL-11", "QSI-11", "NN-2", "EC-1", "PR-2", "DI-2", "STAI-2"));
+			ArrayList<String> profsPersianName = new ArrayList(Arrays.asList("محسنی", "رادکانی", "جدی", "ریاحی", "پیرگزی", "جوانمرد", "میرپور", "قنبری", "میری", "قربانی", "شیرگاهی", "پورهاشم", "دانش", "زورقچیان", "داد", "کشاورزیان", "بوستانی", "قاسمی", "گیتی فر", "رحیمی", "مومنی", "هاشمی", "زکیان", "هوشمندان", "رحمانی", "یزدانی", "جعفری", "پورعنقا", "امیرخانلو", "کرمانی", "الهی"));
+			ArrayList<String> profsEnglishName = new ArrayList(Arrays.asList("Mohseni", "Radkani", "Jeddi", "Riahi", "Pirgazi", "Javanmard", "Mirpour", "Ghanbari", "Miri", "Ghorbani", "Shirgahi", "Pourhashem", "Danesh", "Zoraghchian", "Daad", "Keshavarzian", "Boustani", "Ghasemi", "Gitifar", "Rahimi", "Momeni", "Hashemi", "Zakian", "Houshmandan", "Rahmani", "Yazdani", "Jafari", "Pourangha", "Amirkhanlou", "Kermani", "Elahi"));
+			boolean isPersian = true;
+			if (isPersian) {
+				for (int i = 0; i < coursesName.size(); i++) {
+					int index = coursesEnglishName.indexOf(coursesName.get(i));
+					if (index >= 0)
+						coursesName.set(i, coursesPersianName.get(index));
+				}
+				for (int i = 0; i < profsName.size(); i++) {
+					int index = profsEnglishName.indexOf(profsName.get(i));
+					if (index >= 0)
+						profsName.set(i, profsPersianName.get(index));
+				}
+			}
+			for (int time = 0; time <= 24; time++) {
+				scheduledCourses.add(new ArrayList<String>());
+				scheduledLabs.add(new ArrayList<String>());
+				for (Bitvector bv : rows)
+					if (bv.getAtTime(time)) {
+						String ap = bv.getName();
+						if (ap.startsWith("C") && ap.contains("P")){
+							int cIndex = Integer.parseInt(ap.substring(ap.indexOf("C") + 1, ap.indexOf("P")));
+							if (externalCourses.contains(cIndex))
+								continue;
+							int pIndex = Integer.parseInt(ap.substring(ap.indexOf("P") + 1));
+							if (practicalCourses.contains(cIndex))
+								scheduledLabs.get(time + 1).add(coursesName.get(cIndex) + ":" + profsName.get(pIndex));
+							else
+								scheduledCourses.get(time + 1).add(coursesName.get(cIndex) + ":" + profsName.get(pIndex));
+						}
+					}
+			}
+
+			for (int timeSlot = 1; timeSlot < scheduledCourses.size(); timeSlot++) {
+				int row = rowPerDay*((timeSlot - 1) / 5);
+				int col = (timeSlot - 1) % 5 + 2;
+				if (rightToLeft)
+					col = 8 - col; 
+				for (int classIndex = 1; classIndex <= scheduledCourses.get(timeSlot).size(); classIndex++)
+					setCellValue(sheet, row + classIndex, col, scheduledCourses.get(timeSlot).get(classIndex-1));
+				for (int labIndex = 1; labIndex <= scheduledLabs.get(timeSlot).size(); labIndex++)
+					setCellValue(sheet, row + nClasses + labIndex, col, scheduledLabs.get(timeSlot).get(labIndex-1));
+			}
+
+			inputStream.close();
+			FileOutputStream outputStream = new FileOutputStream(excelFilePath);
+			workbook.write(outputStream);
+			workbook.close();
+			outputStream.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void clearUniTTTable(Sheet sheet, int rowPerDay) {
+		for (int row = 1; row <= 5 * rowPerDay; row++)
+			for (int col = 2; col <= 6; col++)
+				setCellValue(sheet, row, col, "");
+	}
+
+	private static void setCellValue(Sheet sheet, int row, int col, int value) {
+		try {
+			Cell cell2Update = sheet.getRow(row).getCell(col);
+			cell2Update.setCellValue(value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void setCellValue(Sheet sheet, int row, int col, String value) {
+		try {
+			Cell cell2Update = sheet.getRow(row).getCell(col);
+			cell2Update.setCellValue(value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static boolean parseOutput(ArrayList<String> profsName, ArrayList<String> coursesName, ArrayList<Integer> practicalCourses, ArrayList<Integer> externalCourses, int nClasses, int nLabs) {
+		//		softFormulae.get(0).getTimeInstants()
+		//		int bound = Model.getBound();
+		int bound = 0;
+		int loop = 0;
+		String penalty = "Since there is no soft-formula, there is no penalty.";
+		boolean unsat = false;
+		try {
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(new FileInputStream("./z3.output.txt"), "Cp1252"));
+			String line;
+
+			ArrayList<Bitvector> rows = new ArrayList<Bitvector>();
+			while ((line = br.readLine()) != null) {
+				if (line.equals("unsat")) {
+					unsat = true;
+					break;
+				}
+				if (line.contains("(define-fun oltl") || line.contains("(define-fun in_loop"))
+					continue;
+				if (line.contains("(define-fun i_loop")) {
+					String [] tmp = line.split(" ");
+					bound = Integer.parseInt(tmp[tmp.length-1].substring(0, tmp[tmp.length-1].length() - 1)) - 2;
+					line = br.readLine();
+					String value = line.substring(line.indexOf('#') + 2, line.length() - 1);
+					if (line.contains("#b"))
+						loop = Integer.parseInt(value, 2);
+					else if (line.contains("#x"))
+						loop = Integer.parseInt(value, 16);
+				}
+				if (line.contains("(define-fun bvimpl ") || line.contains("(define-fun bviff ") || line.contains("(define-fun somf ") || line.contains("(define-fun somp ") || line.contains("(define-fun alwp ") || line.contains("(define-fun alwf ") || line.contains("(define-fun som ") || line.contains("(define-fun alw ") || line.contains("(define-fun trigger ") || line.contains("(define-fun since ") || line.contains("(define-fun release ") || line.contains("(define-fun until ") || line.contains("(define-fun until ") || line.contains("(define-fun zeta ") || line.contains("(define-fun yesterday ") || line.contains("(define-fun next ") || line.contains("(define-fun loopConF ") || line.contains("(define-fun getbit ") )
+					continue;
+				if (line.contains("(define-fun ")) {
+					String[] ss = line.trim().split(" ");
+					String name = ss[1];
+					line = br.readLine();
+					String value = line.substring(line.indexOf('#') + 2, line.length() - 1);
+					if (line.contains("#x"))
+						rows.add(new Bitvector(name, new BigInteger(value, 16).toString(2)));
+					else
+						rows.add(new Bitvector(name, value));
+				}
+				if (line.contains("(objectives")) {
+					line = br.readLine();
+					line = line.replaceAll("\\(", "").replaceAll("\\)", "").replaceAll(" ", "");
+					if (line.length() > 0)
+						penalty = line;
+					break;
+				}
+
+			}
+			br.close();
+			writeToExcel("./UniTimeTabling.xlsx", bound, nClasses, nLabs ,rows, profsName, coursesName, practicalCourses, externalCourses);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String line = null;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(new File("./oltl.output.txt")));
+			while ((line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return unsat;
+	}
+
+}

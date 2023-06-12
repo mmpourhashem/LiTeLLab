@@ -1,0 +1,15 @@
+1623559863060	Rename local variable 'path'
+1623563342608	Rename type 'TestU'
+1623578610465	Rename compilation unit 'AcetoSpec.java'
+1623583935355	Move compilation unit
+1623585171297	Rename local variable 'smt2'
+1623665780947	Rename method 'setNDays'
+1623665785817	Rename method 'setNTimeSlots'
+1623665792407	Rename method 'setProfsMaxMinEqTimeSlots'
+1623665924474	Rename method 'getProfsMaxMinEqTimeSlots'
+1623665932760	Rename method 'setProfsMaxMinEqTimeSlots'
+1623665943962	Rename local variable 'profsMaxMinEqTimeSlots'
+1623665952858	Rename field 'profsMaxMinEqTimeSlots'
+1623670007358	Copy compilation unit
+1623671986680	Rename local variable 'numrel'
+1623768751974	Rename local variable 'coursesName'

@@ -1,0 +1,5 @@
+1622435689966	Rename local variable 'or'
+1622447716542	Rename method 'getPrefWhoTeachesWhat'
+1622447778545	Rename method 'getPrefsWhoTeachesWhat'
+1622447788636	Rename method 'getPrefsCoursesTaughtByWhom'
+1622465924324	Rename method 'getNoCoursesAfterTheLastDay'

@@ -1,0 +1,1 @@
+(&& (alwf (w (-p- a) 1)) (alwf (somf (!! (-p- a)))))

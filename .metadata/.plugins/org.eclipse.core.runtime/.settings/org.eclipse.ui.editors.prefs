@@ -1,0 +1,7 @@
+comment_stylePreferences=NONE
+comment_text=false
+eclipse.preferences.version=1
+org.eclipse.mylyn.tasks.ui.hyperlinks.detectors.task=false
+org.eclipse.mylyn.tasks.ui.hyperlinks.detectors.url=false
+overviewRuler_migration=migrated_3.1
+warningIndicationInVerticalRuler=false

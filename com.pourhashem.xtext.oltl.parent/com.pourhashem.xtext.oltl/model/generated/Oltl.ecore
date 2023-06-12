@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="oltl" nsURI="http://www.pourhashem.com/xtext/oltl/Oltl" nsPrefix="oltl">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempFormula" eType="#//TempFormula"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Weight">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="neg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wInt" eType="#//WInt" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wFloat" eType="#//WFloat"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WFloat">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TempFormula">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ap" eType="#//AP" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fa" upperBound="-1" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fo" upperBound="-1" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fnot" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="f1" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="f2" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="f" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="weight" eType="#//Weight"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fNext" eType="#//TempFormula"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x1" eType="#//WInt" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x2" eType="#//WInt" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AP">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

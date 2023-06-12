@@ -1,0 +1,52 @@
+sat
+(
+  (define-fun oltl0 () (_ BitVec 4)
+    #xf)
+  (define-fun w1a () (_ BitVec 4)
+    #xd)
+  (define-fun i_loop () (_ BitVec 4)
+    #x2)
+  (define-fun w1b () (_ BitVec 4)
+    #x2)
+  (define-fun a () (_ BitVec 4)
+    #x2)
+  (define-fun oltl3 () (_ BitVec 4)
+    #x1)
+  (define-fun b () (_ BitVec 4)
+    #xf)
+  (define-fun oltl2 () (_ BitVec 4)
+    #xd)
+  (define-fun oltl1 () (_ BitVec 4)
+    #x2)
+  (define-fun costLSum () Real
+    2.5)
+  (define-fun oltl4 () (_ BitVec 4)
+    #x1)
+  (define-fun in_loop () (_ BitVec 4)
+    #xc)
+  (define-fun costHSum () Real
+    0.0)
+  (define-fun costHAvg () Real
+    0.0)
+)
+(objectives
+ (costHAvg 0)
+ (costLSum 2.5)
+)
+(:max-memory            44.56
+ :memory                44.56
+ :num-allocs            1633640
+ :rlimit-count          14616
+ :sat-backjumps         1
+ :sat-conflicts         2
+ :sat-decisions         70
+ :sat-mk-clause-2ary    109
+ :sat-mk-clause-nary    184
+ :sat-mk-var            87
+ :sat-propagations-2ary 210
+ :sat-propagations-nary 214
+ :sat-units             15
+ :solve-eqs-elim-vars   7
+ :solve-eqs-steps       76
+ :time                  0.00
+ :total-time            0.01)
