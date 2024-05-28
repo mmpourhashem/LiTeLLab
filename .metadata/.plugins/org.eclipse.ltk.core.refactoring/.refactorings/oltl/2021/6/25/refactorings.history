@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;TestU.java&apos; to &apos;uniTimeTabling/src/uniTimeTabling&apos;&#x0A;- Original project: &apos;oltl&apos;&#x0A;- Destination element: &apos;uniTimeTabling/src/uniTimeTabling&apos;&#x0A;- Original element: &apos;com.pourhashem.oltl.oltl.TestU.java&apos;" description="Copy compilation unit" destination="=uniTimeTabling/src&lt;uniTimeTabling" element1="/src\/test\/java&lt;com.pourhashem.oltl.oltl{TestU.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1623563142376" units="1" version="1.0"/>
-</session>

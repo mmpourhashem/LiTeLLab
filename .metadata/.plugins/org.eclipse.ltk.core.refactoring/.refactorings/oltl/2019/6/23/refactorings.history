@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract method &apos;private void getFixedPart(String script)&apos; from &apos;com.pourhashem.oltl.oltl.SMT2Builder.SMT2Builder()&apos; to &apos;com.pourhashem.oltl.oltl.SMT2Builder&apos;&#x0A;- Original project: &apos;oltl&apos;&#x0A;- Method name: &apos;getFixedPart&apos;&#x0A;- Destination type: &apos;com.pourhashem.oltl.oltl.SMT2Builder&apos;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;getFixedPart&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src\/main\/java&lt;com.pourhashem.oltl.oltl{SMT2Builder.java" name="getFixedPart" replace="false" selection="165 4089" stamp="1559502224127" version="1.0" visibility="2"/>
-</session>

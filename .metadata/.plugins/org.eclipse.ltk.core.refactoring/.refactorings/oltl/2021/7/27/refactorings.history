@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename method &apos;com.pourhashem.oltl.oltl.TestU.getAllMaxRestOnADay()&apos; to &apos;getAllMaxWaitTimeOnADay&apos;&#x0A;- Original project: &apos;oltl&apos;&#x0A;- Original element: &apos;com.pourhashem.oltl.oltl.TestU.getAllMaxRestOnADay()&apos;&#x0A;- Renamed element: &apos;com.pourhashem.oltl.oltl.TestU.getAllMaxWaitTimeOnADay()&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getAllMaxRestOnADay&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src\/test\/java&lt;com.pourhashem.oltl.oltl{TestU.java[TestU~getAllMaxRestOnADay" name="getAllMaxWaitTimeOnADay" references="true" stamp="1625323527527" version="1.0"/>
-</session>

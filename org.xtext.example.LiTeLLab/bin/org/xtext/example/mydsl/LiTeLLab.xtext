@@ -1,0 +1,65 @@
+/**
+ * @author Mohammad Mehdi Pourhashem Kallehbasti
+ */
+
+grammar org.xtext.example.mydsl.LiTeLLab with org.eclipse.xtext.common.Terminals
+
+generate liTeLLab "http://www.xtext.org/example/mydsl/LiTeLLab"
+ 
+Model:
+	tempFormula=TempFormula
+;
+
+
+Weight:
+	(neg='-')? ((wInt=WInt) | (wFloat=WFloat))
+;
+
+WInt:
+	int=INT
+;
+
+WFloat:
+	int1=INT '.' int2=INT
+//	int1=INT '.' int2=('0'|'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9')* @TODO fix 1.01
+;
+
+TempFormula:
+	ap=AP
+	| ('(' '&&' fa+=TempFormula+ ')' )
+	| ('(' '||' fo+=TempFormula+ ')' )
+	| ('(' '!!' fnot=TempFormula')' )
+	| ('(' op2=OP2 f1=TempFormula f2=TempFormula ')' )
+	| ('(' opf=OPF f=TempFormula ')' )
+	| ('(' 'w' ap=AP weight=Weight')') //point wise weighted formula
+	| ('(' 'iw' iap=AP weight=Weight')') //interval wise weighted formula
+	| ('(' 'next' fNext=TempFormula x1=WInt (x2=WInt)? ')') //Abbreviation
+	| ('([' comp=COMP ']' tt1=TempTerm tt2=TempTerm ')' ) //Temporal terms such as ([<] ([V] clock1) 1)
+;
+
+terminal OP2: //Propositional operators with 2 operands
+	'->' | '<->' | 'until' | 'since' | 'release' | 'trigger'
+;
+
+terminal OPF: //Temporal operators with 1 operands
+	'next' | 'yesterday' | 'alw' | 'som' | 'alwf' | 'somf' | 'alwp' | 'somp'
+;
+
+terminal COMP: //Comparison operators
+	'=' | '>' | '>=' | '<' | '<='
+;
+
+TempTerm:
+	int1=INT | var=VAR | oldVar=oldVAR
+;
+
+AP:
+	'(' '-' ('P' | 'p') '-' pName=ID ')'
+;
+
+VAR: 
+	'(' '-' ('V' | 'v') '-' vName=ID ')'
+;
+oldVAR: //Same as var but when the clock is reset, it refers to the value of the clock just before reset
+	'(' 'old' var=VAR ')'
+;

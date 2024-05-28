@@ -1,2 +1,0 @@
-AssemblyLine al = new AssemblyLine(setupDeadline);
-			App.run(al.getOLTLScript(), "AL" + setupDeadline, 10);
