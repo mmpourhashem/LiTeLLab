@@ -1,0 +1,110 @@
+--- time 0 ---
+high1
+high2
+att2
+att1
+Old_y = 1
+otlDelta = 3
+Old_x2 = 0.9333
+x2 = 0
+otlLength = 3
+y = 0
+Old_x1 = 1
+x1 = 0
+--- time 1 ---
+low1
+high2
+Old_y = 3
+otlDelta = 0.5111
+Old_x2 = 3
+x2 = 3
+otlLength = 0
+y = 3
+Old_x1 = 3
+x1 = 0
+--- time 2 ---
+*LOOP*
+low1
+high2
+Old_y = 3.5111
+otlDelta = 1.1111
+Old_x2 = 3.5111
+x2 = 3.5111
+otlLength = 1
+y = 3.5111
+Old_x1 = 0.5111
+x1 = 0
+--- time 3 ---
+high1
+att
+high2
+att1
+Old_y = 4.6222
+otlDelta = 1.3778
+Old_x2 = 4.6222
+x2 = 4.6222
+otlLength = 2
+y = 0
+Old_x1 = 1.1111
+x1 = 0
+--- time 4 ---
+high1
+low2
+Old_y = 1.3778
+otlDelta = 1.6222
+Old_x2 = 6
+x2 = 0
+otlLength = 1
+y = 1.3778
+Old_x1 = 1.3778
+x1 = 1.3778
+--- time 5 ---
+low2
+low1
+Old_y = 3
+otlDelta = 0.3111
+Old_x2 = 1.6222
+x2 = 0
+otlLength = 0
+y = 3
+Old_x1 = 3
+x1 = 0
+--- time 6 ---
+low2
+low1
+Old_y = 3.3111
+otlDelta = 1.4444
+Old_x2 = 0.3111
+x2 = 0
+otlLength = 1
+y = 3.3111
+Old_x1 = 0.3111
+x1 = 0
+--- time 7 ---
+att
+low1
+high2
+att2
+Old_y = 4.7556
+otlDelta = 3
+Old_x2 = 1.4444
+x2 = 0
+otlLength = 3
+y = 0
+Old_x1 = 1.4444
+x1 = 0
+--- time 8 ---
+low1
+high2
+Old_y = 3
+otlDelta = 0.6889
+Old_x2 = 3
+x2 = 3
+otlLength = 0
+y = 3
+Old_x1 = 3
+x1 = 0
+
+ costHAvg 1.34375
+ costLSum 0
+

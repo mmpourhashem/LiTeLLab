@@ -1,0 +1,13 @@
+(&& 
+	(!! (-P- lamp))
+    (!! (-P- on))
+    (!! (-P- off))
+    (alwf (<-> (-p- OnToOff) (&& (yesterday (-p- lamp)) (!! (-p- lamp)))))
+	(next (alwf (&& 
+		(!! (&& (-P- on) (-P- off)))
+		(<-> 
+	 		(-P- lamp) 
+	 		(since (!! (-P- off)) (-P- on)))
+	 	(-> (-P- on) (yesterday (!! (-P- lamp))))
+	 	(-> (-P- off) (yesterday (-P- lamp)))))))
+

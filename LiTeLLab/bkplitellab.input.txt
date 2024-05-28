@@ -1,0 +1,1269 @@
+/*
+Spring
+	plant1: Snowdrops	at least 3 months,		profit 6.2
+	plant2: Lilies	2 ,		3.8
+
+	Summer 
+	plant3: Tomatoes	2,4.1
+	plant4: Peppers	2,4.2
+
+	Autumn
+	plant5: Chrysanthemums	5, 10
+	plant6: Kale	1, 2.1
+
+	Winter
+	plant7: Violas	3, 6.1
+	plant8: Carrots	2, 3.7
+	Lettuce	1, 2.1
+	Cucumbers	2, 4.1
+
+
+	Planting Ex*/
+(&& 
+
+	(-p- spring1) 
+	(alwf (somf (&& (-p- winter2) (next (-p- spring1)))))
+	([=] (new (-v- x)) 0)
+
+	(!! (next (somf (-p- somePlant1Spring1))))
+	(-> (-p- somePlant1Spring1) (somf (&& (-p- spring1) (-p- plant1))))
+	(w (-p- somePlant1Spring1) 6.2)
+
+	(!! (next (somf (-p- somePlant2Spring1))))
+	(-> (-p- somePlant2Spring1) (somf (&& (-p- spring1) (-p- plant2))))
+	(w (-p- somePlant2Spring1) 3.8)
+
+	(!! (next (somf (-p- somePlant3Summer1))))
+	(-> (-p- somePlant3Summer1) (somf (&& (-p- summer1) (-p- plant3))))
+	(w (-p- somePlant3Summer1) 4.1)
+
+	(!! (next (somf (-p- somePlant4Summer1))))
+	(-> (-p- somePlant4Summer1) (somf (&& (-p- summer1) (-p- plant4))))
+	(w (-p- somePlant4Summer1) 4.2)
+
+	(!! (next (somf (-p- somePlant5Autumn1))))
+	(-> (-p- somePlant5Autumn1) (somf (&& (-p- autumn1) (-p- plant5))))
+	(w (-p- somePlant5Autumn1) 10)
+
+	(!! (next (somf (-p- somePlant6Autumn1))))
+	(-> (-p- somePlant6Autumn1) (somf (&& (-p- autumn1) (-p- plant6))))
+	(w (-p- somePlant6Autumn1) 2.1)
+
+	(!! (next (somf (-p- somePlant7Winter1))))
+	(-> (-p- somePlant7Winter1) (somf (&& (-p- winter1) (-p- plant7))))
+	(w (-p- somePlant7Winter1) 6.1)
+
+	(!! (next (somf (-p- somePlant8Winter1))))
+	(-> (-p- somePlant8Winter1) (somf (&& (-p- winter1) (-p- plant8))))
+	(w (-p- somePlant8Winter1) 3.7)
+
+	(!! (next (somf (-p- somePlant1Spring2))))
+	(-> (-p- somePlant1Spring2) (somf (&& (-p- spring2) (-p- plant1))))
+	(w (-p- somePlant1Spring2) 6.2)
+
+	(!! (next (somf (-p- somePlant2Spring2))))
+	(-> (-p- somePlant2Spring2) (somf (&& (-p- spring2) (-p- plant2))))
+	(w (-p- somePlant2Spring2) 3.8)
+
+	(!! (next (somf (-p- somePlant3Summer2))))
+	(-> (-p- somePlant3Summer2) (somf (&& (-p- summer2) (-p- plant3))))
+	(w (-p- somePlant3Summer2) 4.2)
+
+	(!! (next (somf (-p- somePlant4Summer2))))
+	(-> (-p- somePlant4Summer2) (somf (&& (-p- summer2) (-p- plant4))))
+	(w (-p- somePlant4Summer2) 4.2)
+
+	(!! (next (somf (-p- somePlant5Autumn2))))
+	(-> (-p- somePlant5Autumn2) (somf (&& (-p- autumn2) (-p- plant5))))
+	(w (-p- somePlant5Autumn2) 10)
+
+	(!! (next (somf (-p- somePlant6Autumn2))))
+	(-> (-p- somePlant6Autumn2) (somf (&& (-p- autumn2) (-p- plant6))))
+	(w (-p- somePlant6Autumn2) 2.2)
+
+	(!! (next (somf (-p- somePlant7Winter2))))
+	(-> (-p- somePlant7Winter2) (somf (&& (-p- winter2) (-p- plant7))))
+	(w (-p- somePlant7Winter2) 6.2)
+
+	(!! (next (somf (-p- somePlant8Winter2))))
+	(-> (-p- somePlant8Winter2) (somf (&& (-p- winter2) (-p- plant8))))
+	(w (-p- somePlant8Winter2) 3.7)
+
+	(alwf (&& 
+
+	(-> (-p- plant1) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant2) (!! (|| (-p- plant1) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant3) (!! (|| (-p- plant2) (-p- plant1) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant4) (!! (|| (-p- plant2) (-p- plant3) (-p- plant1) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant5) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant1) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant6) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant1) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant7) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant1) (-p- plant8))))
+	(-> (-p- plant8) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant1))))
+	
+	(-> ([=] (new (-v- plant)) 0) (|| 
+		(&& (-p- plant1) (!! (yesterday (-p- plant1)))) 
+		(&& (-p- plant2) (!! (yesterday (-p- plant2))))
+		(&& (-p- plant3) (!! (yesterday (-p- plant3)))) 
+		(&& (-p- plant4) (!! (yesterday (-p- plant4))))
+		(&& (-p- plant5) (!! (yesterday (-p- plant5))))
+		(&& (-p- plant6) (!! (yesterday (-p- plant6))))
+		(&& (-p- plant7) (!! (yesterday (-p- plant7))))
+		(&& (-p- plant8) (!! (yesterday (-p- plant8))))
+	))
+
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) (&& (|| (-p- spring1) (-p- spring2)) (until (-p- plant1) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) (&& (|| (-p- spring1) (-p- spring2)) (until (-p- plant2) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) (&& (|| (-p- summer1) (-p- summer2)) (until (-p- plant3) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) (&& (|| (-p- summer1) (-p- summer2)) (until (-p- plant4) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) (&& (|| (-p- autumn1) (-p- autumn2)) (until (-p- plant5) ([=] (-v- plant) 5))))
+
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) (&& (|| (-p- autumn1) (-p- autumn2)) (until (-p- plant6) ([=] (-v- plant) 1))))
+
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) (&&  (|| (-p- winter1) (-p- winter2)) (until (-p- plant7) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) (&& (|| (-p- winter1) (-p- winter2)) (until (-p- plant8) ([=] (-v- plant) 2))))
+
+	(-> (-p- spring1) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- summer1) (!! (|| (-p- spring1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- autumn1) (!! (|| (-p- summer1) (-p- spring1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- winter1) (!! (|| (-p- summer1) (-p- autumn1) (-p- spring1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- spring2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring1) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- summer2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- spring1) (-p- autumn2) (-p- winter2))))
+	(-> (-p- autumn2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- spring1) (-p- winter2))))
+	(-> (-p- winter2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- spring1))))
+
+	(<-> (&& (yesterday (-p- spring1)) (-p- newSeason)) (&& (!! (yesterday (-p- summer1))) (-p- summer1)))
+	(<-> (&& (yesterday (-p- summer1)) (-p- newSeason)) (&& (!! (yesterday (-p- autumn1))) (-p- autumn1)))
+	(<-> (&& (yesterday (-p- autumn1)) (-p- newSeason)) (&& (!! (yesterday (-p- winter1))) (-p- winter1)))
+	(<-> (&& (yesterday (-p- winter1)) (-p- newSeason)) (&& (!! (yesterday (-p- spring2))) (-p- spring2)))
+	(<-> (&& (yesterday (-p- spring2)) (-p- newSeason)) (&& (!! (yesterday (-p- summer2))) (-p- summer2)))
+	(<-> (&& (yesterday (-p- summer2)) (-p- newSeason)) (&& (!! (yesterday (-p- autumn2))) (-p- autumn2)))
+	(<-> (&& (yesterday (-p- autumn2)) (-p- newSeason)) (&& (!! (yesterday (-p- winter2))) (-p- winter2)))
+	(next (<-> (&& (yesterday (-p- winter2)) (-p- newSeason)) (&& (!! (yesterday (-p- spring1))) (-p- spring1))))
+
+	(<-> (-p- newSeason) ([=] (new (-v- x)) 0))
+	(next (<-> (-p- newSeason) ([=] (-v- x) 3)))
+
+	)))//
+
+/*/Final PowerEx 10mk7 newEnc 19mk7
+(&& 
+(!! (&& (-p- m1w1cool2) (-p- m1w2cool4))) (|| (-p- m1w1cool2) (-p- m1w2cool4)) (next (!! (somf (|| (-p- m1w1cool2) (-p- m1w2cool4)))))
+(!! (&& (-p- m2w2cool1) (-p- m2w3cool2))) (|| (-p- m2w2cool1) (-p- m2w3cool2)) (next (!! (somf (|| (-p- m2w2cool1) (-p- m2w3cool2)))))
+(!! (&& (-p- powerw2cool2) (-p- powerw3cool1))) (|| (-p- powerw2cool2) (-p- powerw3cool1)) (next (!! (somf (|| (-p- powerw2cool2) (-p- powerw3cool1)))))
+	(-> (-p- powerw3cool1) (alwf (!! (&& (-p- m1) (-p- m2)))))
+
+//m1w1cool2: 1W-2Cool
+(-> (-p- m1w1cool2) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 1) (next ([>] (-v- c1) 1)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 1) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//m1w2cool4: 2W-4Cool
+(-> (-p- m1w2cool4) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 2) (next ([>] (-v- c1) 2)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 4) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//M2Mode1: 2W-1Cool
+(-> (-p- m2w2cool1) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 2) (next ([>] (-v- c2) 2)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 1) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+//M2Mode2: 3W-2Cool
+(-> (-p- m2w3cool2) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 3) (next ([>] (-v- c2) 3)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 3) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+
+//powerw2cool2: Supports 2 Machines, 2W-2Cool
+(-> (-p- powerw2cool2) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 2) (next ([>] (-v- c3) 2)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+//powerw3cool1: Supports 1 Machine, 3W-1Cool
+(-> (-p- powerw3cool1) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 3) (next ([>] (-v- c3) 3)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 3) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 1) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+
+(alwf (&&
+(iw (-p- m1) 1) (iw (-p- m2) 1)
+(-> (-p- m1) (-p- power)) (-> (-p- m2) (-p- power))
+	))
+)/*/
+
+/*/Double manufacturing machine//Final 10mk8 costHAvg 1.96875 costLSum 2.75
+(&& //([<] (-v- z) 7)
+([=] (new (-v- z)) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (new (-v- x1)) 0) ([=] (new (-v- x2)) 0) 
+(alwf (&&
+	(!! (&& ([<] (new (-v- x1)) 3) (next ([>] (-v- x1) 3)))) (!! (&& ([<] (new (-v- x2)) 6) (next ([>] (-v- x2) 6))))
+	(-> (-p- high1) ([<] (new (-v- x1)) 3)) (-> (-p- high2) ([<] (new (-v- x2)) 6))
+	(-> (-p- high1) (|| (-p- att1) (yesterday (-p- high1)))) (-> (-p- high2) (|| (-p- att2) (yesterday (-p- high2))))
+	(-> (&& (-p- high1) (next (-p- low1))) (next ([=] (-v- x1) 3)))		(-> (&& (-p- high2) (next (-p- low2))) (next ([=] (-v- x2) 6)))
+	(iw (-p- high1) 1.75) //(iw (-p- low1) 0.75) (iw (-p- high1) 2.5)
+	(iw (-p- high2) 1) //(iw (-p- low2) 1.5) (iw (-p- high2) 2.5)
+	(<-> (-p- high1) (!! (-p- low1))) 										(<-> (-p- high2) (!! (-p- low2)))
+))
+(next (alwf (&&
+	(-> (-p- att) ([>=] (-v- z) 4))
+	(-> (-p- att1) ([=] (new (-v- x1)) 0))									(-> (-p- att2) ([=] (new (-v- x2)) 0))
+	(-> ([=] (new (-v- x1)) 0) (|| (-p- att1) (-p- low1)))	(-> ([=] (new (-v- x2)) 0) (|| (-p- att2) (-p- low2)))
+	(-> (-p- low1) ([=] (new (-v- x1)) 0)) (-> (-p- low2) ([=] (new (-v- x2)) 0))
+	(<-> (-p- att) (|| (-p- att1) (-p- att2)))
+	(!! (&& (-p- att1) (-p- att2)))
+	(-> (-p- att) ([=] (new (-v- z)) 0))
+		))))/*/
+
+/*/Single manufacturing machine//Final 5s-k5 (costHAvg 0.4375)
+(&& //([<] (-v- z) 5)
+([=] (new (-v- z)) 0) (!! (-p- low)) ([=] (new (-v- x)) 0) (-p- high) (next (-p- high))
+(alwf (iw (-p- high) 1.75))
+(next (alwf (&&
+	(-> (-p- high) ([<] (new (-v- x)) 3))
+	(-> (&& (-p- high) (next (-p- low))) (next ([=] (-v- x) 3)))
+	(<-> (-p- high) (!! (-p- low)))
+	(<-> ([=] (new (-v- z)) 0) ([>=] (-v- z) 4))
+	(<-> ([=] (new (-v- x)) 0) ([=] (new (-v- z)) 0))
+	(!! (&& ([<] (new (-v- x)) 3) (next ([>] (-v- x) 3))))
+		))))/*/
+
+
+/*/
+(&& (iw (-p- point) 2.22) (iw (-p- interval) 3.33)
+	([>] (-v- bbb) 3))
+/*/
+/*Spring
+	plant1: Snowdrops	at least 3 months,		profit 6.2
+	plant2: Lilies	2 ,		3.8
+
+	Summer 
+	plant3: Tomatoes	2,4.1
+	plant4: Peppers	2,4.2
+
+	Autumn
+	plant5: Chrysanthemums	5, 10
+	plant6: Kale	1, 2.1
+
+	Winter
+	plant7: Violas	3, 6.1
+	plant8: Carrots	2, 3.7
+	Lettuce	1, 2.1
+	Cucumbers	2, 4.1
+
+
+	*///Planting Ex
+(&& 
+
+	(-p- spring1) ([=] (new (-v- x)) 0) //(somf (&& ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))
+
+// (next (-p- end) 15) 
+// (next (!! (-p- end)) 14) (next (!! (-p- end)) 13) (next (!! (-p- end)) 12) (next (!! (-p- end)) 11) (next (!! (-p- end)) 10)
+// (next (!! (-p- end)) 9) (next (!! (-p- end)) 8) (next (!! (-p- end)) 7) (next (!! (-p- end)) 6) (next (!! (-p- end)) 5) (next (!! (-p- end)) 4) (next (!! (-p- end)) 3) (next (!! (-p- end)) 2) (next (!! (-p- end))) (!! (-p- end))
+
+(alwf //(-> (&& (-p- spring) (next (!! (-p- spring)))) (next (!! (until (!! (-p- end)) (-p- spring))))))//only 1 year in the loop
+
+	(!! (next (somf (-p- somePlant1Spring1))))
+	(<-> (-p- somePlant1Spring1) (somf (&& (-p- spring1) (-p- plant1))))
+	(w (-p- somePlant1Spring1) 6.2)
+
+	(!! (next (somf (-p- somePlant2Spring1))))
+	(<-> (-p- somePlant2Spring1) (somf (&& (-p- spring1) (-p- plant2))))
+	(w (-p- somePlant2Spring1) 3.8)
+
+	(!! (next (somf (-p- somePlant3Summer1))))
+	(<-> (-p- somePlant3Summer1) (somf (&& (-p- summer1) (-p- plant3))))
+	(w (-p- somePlant3Summer1) 4.1)
+
+	(!! (next (somf (-p- somePlant4Summer1))))
+	(<-> (-p- somePlant4Summer1) (somf (&& (-p- summer1) (-p- plant4))))
+	(w (-p- somePlant4Summer1) 4.2)
+
+	(!! (next (somf (-p- somePlant5Autumn1))))
+	(<-> (-p- somePlant5Autumn1) (somf (&& (-p- autumn1) (-p- plant5))))
+	(w (-p- somePlant5Autumn1) 10)
+
+	(!! (next (somf (-p- somePlant6Autumn1))))
+	(<-> (-p- somePlant6Autumn1) (somf (&& (-p- autumn1) (-p- plant6))))
+	(w (-p- somePlant6Autumn1) 2.1)
+
+	(!! (next (somf (-p- somePlant7Winter1))))
+	(<-> (-p- somePlant7Winter1) (somf (&& (-p- winter1) (-p- plant7))))
+	(w (-p- somePlant7Winter1) 6.1)
+
+	(!! (next (somf (-p- somePlant8Winter1))))
+	(<-> (-p- somePlant8Winter1) (somf (&& (-p- winter1) (-p- plant8))))
+	(w (-p- somePlant8Winter1) 3.7)
+
+	(!! (next (somf (-p- somePlant1Spring2))))
+	(<-> (-p- somePlant1Spring2) (somf (&& (-p- spring2) (-p- plant1))))
+	(w (-p- somePlant1Spring2) 6.2)
+
+	(!! (next (somf (-p- somePlant2Spring2))))
+	(<-> (-p- somePlant2Spring2) (somf (&& (-p- spring2) (-p- plant2))))
+	(w (-p- somePlant2Spring2) 3.8)
+
+	(!! (next (somf (-p- somePlant3Summer2))))
+	(<-> (-p- somePlant3Summer2) (somf (&& (-p- summer2) (-p- plant3))))
+	(w (-p- somePlant3Summer2) 4.2)
+
+	(!! (next (somf (-p- somePlant4Summer2))))
+	(<-> (-p- somePlant4Summer2) (somf (&& (-p- summer2) (-p- plant4))))
+	(w (-p- somePlant4Summer2) 4.2)
+
+	(!! (next (somf (-p- somePlant5Autumn2))))
+	(<-> (-p- somePlant5Autumn2) (somf (&& (-p- autumn2) (-p- plant5))))
+	(w (-p- somePlant5Autumn2) 10)
+
+	(!! (next (somf (-p- somePlant6Autumn2))))
+	(<-> (-p- somePlant6Autumn2) (somf (&& (-p- autumn2) (-p- plant6))))
+	(w (-p- somePlant6Autumn2) 2.2)
+
+	(!! (next (somf (-p- somePlant7Winter2))))
+	(<-> (-p- somePlant7Winter2) (somf (&& (-p- winter2) (-p- plant7))))
+	(w (-p- somePlant7Winter2) 6.2)
+
+	(!! (next (somf (-p- somePlant8Winter2))))
+	(<-> (-p- somePlant8Winter2) (somf (&& (-p- winter2) (-p- plant8))))
+	(w (-p- somePlant8Winter2) 3.7)
+
+
+	// (alwf (somf (-p- spring)))
+	// (alwf (somf (-p- summer)))
+	// (alwf (somf (-p- autumn)))
+	// (alwf (somf (-p- winter)))
+	(alwf (&& 
+
+	(-> (-p- plant1) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant2) (!! (|| (-p- plant1) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant3) (!! (|| (-p- plant2) (-p- plant1) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant4) (!! (|| (-p- plant2) (-p- plant3) (-p- plant1) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant5) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant1) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant6) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant1) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant7) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant1) (-p- plant8))))
+	(-> (-p- plant8) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant1))))
+	
+	(-> ([=] (new (-v- plant)) 0) (|| 
+		(&& (-p- plant1) (!! (yesterday (-p- plant1)))) 
+		(&& (-p- plant2) (!! (yesterday (-p- plant2))))
+		(&& (-p- plant3) (!! (yesterday (-p- plant3)))) 
+		(&& (-p- plant4) (!! (yesterday (-p- plant4))))
+		(&& (-p- plant5) (!! (yesterday (-p- plant5))))
+		(&& (-p- plant6) (!! (yesterday (-p- plant6))))
+		(&& (-p- plant7) (!! (yesterday (-p- plant7))))
+		(&& (-p- plant8) (!! (yesterday (-p- plant8))))
+	))
+
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) (&& (|| (-p- spring1) (-p- spring2)) (until (-p- plant1) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) (&& (|| (-p- spring1) (-p- spring2)) (until (-p- plant2) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) (&& (|| (-p- summer1) (-p- summer2)) (until (-p- plant3) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) (&& (|| (-p- summer1) (-p- summer2)) (until (-p- plant4) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) (&& (|| (-p- autumn1) (-p- autumn2)) (until (-p- plant5) ([=] (-v- plant) 5))))
+
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) (&& (|| (-p- autumn1) (-p- autumn2)) (until (-p- plant6) ([=] (-v- plant) 1))))
+
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) (&&  (|| (-p- winter1) (-p- winter2)) (until (-p- plant7) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) (&& (|| (-p- winter1) (-p- winter2)) (until (-p- plant8) ([=] (-v- plant) 2))))
+
+
+
+
+	(-> (-p- spring1) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- summer1) (!! (|| (-p- spring1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- autumn1) (!! (|| (-p- summer1) (-p- spring1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- winter1) (!! (|| (-p- summer1) (-p- autumn1) (-p- spring1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- spring2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring1) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- summer2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- spring1) (-p- autumn2) (-p- winter2))))
+	(-> (-p- autumn2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- spring1) (-p- winter2))))
+	(-> (-p- winter2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- spring1))))
+
+	(-> (&& (-p- spring1) (next (!!(-p- spring1)))) (next (-p- summer1)))
+	(-> (&& (-p- summer1) (next (!!(-p- summer1)))) (next (-p- autumn1)))
+	(-> (&& (-p- autumn1) (next (!!(-p- autumn1)))) (next (-p- winter1)))
+	(-> (&& (-p- winter1) (next (!!(-p- winter1)))) (next (-p- spring2)))
+	(-> (&& (-p- spring2) (next (!!(-p- spring2)))) (next (-p- summer2)))
+	(-> (&& (-p- summer2) (next (!!(-p- summer2)))) (next (-p- autumn2)))
+	(-> (&& (-p- autumn2) (next (!!(-p- autumn2)))) (next (-p- winter2)))
+	(-> (&& (-p- winter2) (next (!!(-p- winter2)))) (next (-p- spring1)))
+
+	(-> (-p- spring1) (next (|| (&& (-p- spring1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- spring1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- summer1) (next (|| (&& (-p- summer1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- summer1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- autumn1) (next (|| (&& (-p- autumn1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- autumn1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- winter1) (next (|| (&& (-p- winter1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- winter1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- spring2) (next (|| (&& (-p- spring2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- spring2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- summer2) (next (|| (&& (-p- summer2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- summer2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- autumn2) (next (|| (&& (-p- autumn2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- autumn2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- winter2) (next (|| (&& (-p- winter2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- winter2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	)))//
+
+/*/Final PowerEx 10mk7 newEnc 19mk7
+(&& 
+(!! (&& (-p- m1w1cool2) (-p- m1w2cool4))) (|| (-p- m1w1cool2) (-p- m1w2cool4)) (next (!! (somf (|| (-p- m1w1cool2) (-p- m1w2cool4)))))
+(!! (&& (-p- m2w2cool1) (-p- m2w3cool2))) (|| (-p- m2w2cool1) (-p- m2w3cool2)) (next (!! (somf (|| (-p- m2w2cool1) (-p- m2w3cool2)))))
+(!! (&& (-p- powerw2cool2) (-p- powerw3cool1))) (|| (-p- powerw2cool2) (-p- powerw3cool1)) (next (!! (somf (|| (-p- powerw2cool2) (-p- powerw3cool1)))))
+	(-> (-p- powerw3cool1) (alwf (!! (&& (-p- m1) (-p- m2)))))
+
+//m1w1cool2: 1W-2Cool
+(-> (-p- m1w1cool2) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 1) (next ([>] (-v- c1) 1)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 1) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//m1w2cool4: 2W-4Cool
+(-> (-p- m1w2cool4) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 2) (next ([>] (-v- c1) 2)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 4) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//M2Mode1: 2W-1Cool
+(-> (-p- m2w2cool1) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 2) (next ([>] (-v- c2) 2)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 1) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+//M2Mode2: 3W-2Cool
+(-> (-p- m2w3cool2) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 3) (next ([>] (-v- c2) 3)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 3) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+
+//powerw2cool2: Supports 2 Machines, 2W-2Cool
+(-> (-p- powerw2cool2) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 2) (next ([>] (-v- c3) 2)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+//powerw3cool1: Supports 1 Machine, 3W-1Cool
+(-> (-p- powerw3cool1) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 3) (next ([>] (-v- c3) 3)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 3) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 1) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+
+(alwf (&&
+(iw (-p- m1) 1) (iw (-p- m2) 1)
+(-> (-p- m1) (-p- power)) (-> (-p- m2) (-p- power))
+	))
+)/*/
+
+/*/Double manufacturing machine//Final 10mk8 costHAvg 1.96875 costLSum 2.75
+(&& //([<] (-v- z) 7)
+([=] (new (-v- z)) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (new (-v- x1)) 0) ([=] (new (-v- x2)) 0) 
+(alwf (&&
+	(!! (&& ([<] (new (-v- x1)) 3) (next ([>] (-v- x1) 3)))) (!! (&& ([<] (new (-v- x2)) 6) (next ([>] (-v- x2) 6))))
+	(-> (-p- high1) ([<] (new (-v- x1)) 3)) (-> (-p- high2) ([<] (new (-v- x2)) 6))
+	(-> (-p- high1) (|| (-p- att1) (yesterday (-p- high1)))) (-> (-p- high2) (|| (-p- att2) (yesterday (-p- high2))))
+	(-> (&& (-p- high1) (next (-p- low1))) (next ([=] (-v- x1) 3)))		(-> (&& (-p- high2) (next (-p- low2))) (next ([=] (-v- x2) 6)))
+	(iw (-p- high1) 1.75) //(iw (-p- low1) 0.75) (iw (-p- high1) 2.5)
+	(iw (-p- high2) 1) //(iw (-p- low2) 1.5) (iw (-p- high2) 2.5)
+	(<-> (-p- high1) (!! (-p- low1))) 										(<-> (-p- high2) (!! (-p- low2)))
+))
+(next (alwf (&&
+	(-> (-p- att) ([>=] (-v- z) 4))
+	(-> (-p- att1) ([=] (new (-v- x1)) 0))									(-> (-p- att2) ([=] (new (-v- x2)) 0))
+	(-> ([=] (new (-v- x1)) 0) (|| (-p- att1) (-p- low1)))	(-> ([=] (new (-v- x2)) 0) (|| (-p- att2) (-p- low2)))
+	(-> (-p- low1) ([=] (new (-v- x1)) 0)) (-> (-p- low2) ([=] (new (-v- x2)) 0))
+	(<-> (-p- att) (|| (-p- att1) (-p- att2)))
+	(!! (&& (-p- att1) (-p- att2)))
+	(-> (-p- att) ([=] (new (-v- z)) 0))
+		))))/*/
+
+/*/Single manufacturing machine//Final 5s-k5 (costHAvg 0.4375)
+(&& //([<] (-v- z) 5)
+([=] (new (-v- z)) 0) (!! (-p- low)) ([=] (new (-v- x)) 0) (-p- high) (next (-p- high))
+(alwf (iw (-p- high) 1.75))
+(next (alwf (&&
+	(-> (-p- high) ([<] (new (-v- x)) 3))
+	(-> (&& (-p- high) (next (-p- low))) (next ([=] (-v- x) 3)))
+	(<-> (-p- high) (!! (-p- low)))
+	(<-> ([=] (new (-v- z)) 0) ([>=] (-v- z) 4))
+	(<-> ([=] (new (-v- x)) 0) ([=] (new (-v- z)) 0))
+	(!! (&& ([<] (new (-v- x)) 3) (next ([>] (-v- x) 3))))
+		))))/*/
+
+
+/*/
+(&& (iw (-p- point) 2.22) (iw (-p- interval) 3.33)
+	([>] (-v- bbb) 3))
+/*/
+
+
+/*Spring
+	plant1: Snowdrops	at least 3 months,		profit 6.2
+	plant2: Lilies	2 ,		3.8
+
+	Summer 
+	plant3: Tomatoes	2,4.1
+	plant4: Peppers	2,4.2
+
+	Autumn
+	plant5: Chrysanthemums	5, 10
+	plant6: Kale	1, 2.1
+
+	Winter
+	plant7: Violas	3, 6.1
+	plant8: Carrots	2, 3.7
+	Lettuce	1, 2.1
+	Cucumbers	2, 4.1
+
+
+	*///Planting Ex
+(&& 
+
+	(-p- spring1) ([=] (new (-v- x)) 0) //(somf (&& ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))
+
+// (next (-p- end) 15) 
+// (next (!! (-p- end)) 14) (next (!! (-p- end)) 13) (next (!! (-p- end)) 12) (next (!! (-p- end)) 11) (next (!! (-p- end)) 10)
+// (next (!! (-p- end)) 9) (next (!! (-p- end)) 8) (next (!! (-p- end)) 7) (next (!! (-p- end)) 6) (next (!! (-p- end)) 5) (next (!! (-p- end)) 4) (next (!! (-p- end)) 3) (next (!! (-p- end)) 2) (next (!! (-p- end))) (!! (-p- end))
+
+(alwf //(-> (&& (-p- spring) (next (!! (-p- spring)))) (next (!! (until (!! (-p- end)) (-p- spring))))))//only 1 year in the loop
+
+	(!! (next (somf (-p- somePlant1Spring1))))
+	(<-> (-p- somePlant1Spring1) (somf (&& (-p- spring1) (-p- plant1))))
+	(w (-p- somePlant1Spring1) 6.2)
+
+	(!! (next (somf (-p- somePlant2Spring1))))
+	(<-> (-p- somePlant2Spring1) (somf (&& (-p- spring1) (-p- plant2))))
+	(w (-p- somePlant2Spring1) 3.8)
+
+	(!! (next (somf (-p- somePlant3Summer1))))
+	(<-> (-p- somePlant3Summer1) (somf (&& (-p- summer1) (-p- plant3))))
+	(w (-p- somePlant3Summer1) 4.1)
+
+	(!! (next (somf (-p- somePlant4Summer1))))
+	(<-> (-p- somePlant4Summer1) (somf (&& (-p- summer1) (-p- plant4))))
+	(w (-p- somePlant4Summer1) 4.2)
+
+	(!! (next (somf (-p- somePlant5Autumn1))))
+	(<-> (-p- somePlant5Autumn1) (somf (&& (-p- autumn1) (-p- plant5))))
+	(w (-p- somePlant5Autumn1) 10)
+
+	(!! (next (somf (-p- somePlant6Autumn1))))
+	(<-> (-p- somePlant6Autumn1) (somf (&& (-p- autumn1) (-p- plant6))))
+	(w (-p- somePlant6Autumn1) 2.1)
+
+	(!! (next (somf (-p- somePlant7Winter1))))
+	(<-> (-p- somePlant7Winter1) (somf (&& (-p- winter1) (-p- plant7))))
+	(w (-p- somePlant7Winter1) 6.1)
+
+	(!! (next (somf (-p- somePlant8Winter1))))
+	(<-> (-p- somePlant8Winter1) (somf (&& (-p- winter1) (-p- plant8))))
+	(w (-p- somePlant8Winter1) 3.7)
+
+	(!! (next (somf (-p- somePlant1Spring2))))
+	(<-> (-p- somePlant1Spring2) (somf (&& (-p- spring2) (-p- plant1))))
+	(w (-p- somePlant1Spring2) 6.2)
+
+	(!! (next (somf (-p- somePlant2Spring2))))
+	(<-> (-p- somePlant2Spring2) (somf (&& (-p- spring2) (-p- plant2))))
+	(w (-p- somePlant2Spring2) 3.8)
+
+	(!! (next (somf (-p- somePlant3Summer2))))
+	(<-> (-p- somePlant3Summer2) (somf (&& (-p- summer2) (-p- plant3))))
+	(w (-p- somePlant3Summer2) 4.2)
+
+	(!! (next (somf (-p- somePlant4Summer2))))
+	(<-> (-p- somePlant4Summer2) (somf (&& (-p- summer2) (-p- plant4))))
+	(w (-p- somePlant4Summer2) 4.2)
+
+	(!! (next (somf (-p- somePlant5Autumn2))))
+	(<-> (-p- somePlant5Autumn2) (somf (&& (-p- autumn2) (-p- plant5))))
+	(w (-p- somePlant5Autumn2) 10)
+
+	(!! (next (somf (-p- somePlant6Autumn2))))
+	(<-> (-p- somePlant6Autumn2) (somf (&& (-p- autumn2) (-p- plant6))))
+	(w (-p- somePlant6Autumn2) 2.2)
+
+	(!! (next (somf (-p- somePlant7Winter2))))
+	(<-> (-p- somePlant7Winter2) (somf (&& (-p- winter2) (-p- plant7))))
+	(w (-p- somePlant7Winter2) 6.2)
+
+	(!! (next (somf (-p- somePlant8Winter2))))
+	(<-> (-p- somePlant8Winter2) (somf (&& (-p- winter2) (-p- plant8))))
+	(w (-p- somePlant8Winter2) 3.7)
+
+
+	// (alwf (somf (-p- spring)))
+	// (alwf (somf (-p- summer)))
+	// (alwf (somf (-p- autumn)))
+	// (alwf (somf (-p- winter)))
+	(alwf (&& 
+
+	(-> (-p- plant1) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant2) (!! (|| (-p- plant1) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant3) (!! (|| (-p- plant2) (-p- plant1) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant4) (!! (|| (-p- plant2) (-p- plant3) (-p- plant1) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant5) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant1) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant6) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant1) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant7) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant1) (-p- plant8))))
+	(-> (-p- plant8) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant1))))
+	
+	(-> ([=] (new (-v- plant)) 0) (|| 
+		(&& (-p- plant1) (!! (yesterday (-p- plant1)))) 
+		(&& (-p- plant2) (!! (yesterday (-p- plant2))))
+		(&& (-p- plant3) (!! (yesterday (-p- plant3)))) 
+		(&& (-p- plant4) (!! (yesterday (-p- plant4))))
+		(&& (-p- plant5) (!! (yesterday (-p- plant5))))
+		(&& (-p- plant6) (!! (yesterday (-p- plant6))))
+		(&& (-p- plant7) (!! (yesterday (-p- plant7))))
+		(&& (-p- plant8) (!! (yesterday (-p- plant8))))
+	))
+
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) (&& (|| (-p- spring1) (-p- spring2)) (until (-p- plant1) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) (&& (|| (-p- spring1) (-p- spring2)) (until (-p- plant2) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) (&& (|| (-p- summer1) (-p- summer2)) (until (-p- plant3) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) (&& (|| (-p- summer1) (-p- summer2)) (until (-p- plant4) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) (&& (|| (-p- autumn1) (-p- autumn2)) (until (-p- plant5) ([=] (-v- plant) 5))))
+
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) (&& (|| (-p- autumn1) (-p- autumn2)) (until (-p- plant6) ([=] (-v- plant) 1))))
+
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) (&&  (|| (-p- winter1) (-p- winter2)) (until (-p- plant7) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) (&& (|| (-p- winter1) (-p- winter2)) (until (-p- plant8) ([=] (-v- plant) 2))))
+
+
+
+
+	(-> (-p- spring1) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- summer1) (!! (|| (-p- spring1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- autumn1) (!! (|| (-p- summer1) (-p- spring1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- winter1) (!! (|| (-p- summer1) (-p- autumn1) (-p- spring1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- spring2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring1) (-p- summer2) (-p- autumn2) (-p- winter2))))
+	(-> (-p- summer2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- spring1) (-p- autumn2) (-p- winter2))))
+	(-> (-p- autumn2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- spring1) (-p- winter2))))
+	(-> (-p- winter2) (!! (|| (-p- summer1) (-p- autumn1) (-p- winter1) (-p- spring2) (-p- summer2) (-p- autumn2) (-p- spring1))))
+
+	(-> (&& (-p- spring1) (next (!!(-p- spring1)))) (next (-p- summer1)))
+	(-> (&& (-p- summer1) (next (!!(-p- summer1)))) (next (-p- autumn1)))
+	(-> (&& (-p- autumn1) (next (!!(-p- autumn1)))) (next (-p- winter1)))
+	(-> (&& (-p- winter1) (next (!!(-p- winter1)))) (next (-p- spring2)))
+	(-> (&& (-p- spring2) (next (!!(-p- spring2)))) (next (-p- summer2)))
+	(-> (&& (-p- summer2) (next (!!(-p- summer2)))) (next (-p- autumn2)))
+	(-> (&& (-p- autumn2) (next (!!(-p- autumn2)))) (next (-p- winter2)))
+	(-> (&& (-p- winter2) (next (!!(-p- winter2)))) (next (-p- spring1)))
+
+	(-> (-p- spring1) (next (|| (&& (-p- spring1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- spring1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- summer1) (next (|| (&& (-p- summer1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- summer1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- autumn1) (next (|| (&& (-p- autumn1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- autumn1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- winter1) (next (|| (&& (-p- winter1) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- winter1)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- spring2) (next (|| (&& (-p- spring2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- spring2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- summer2) (next (|| (&& (-p- summer2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- summer2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- autumn2) (next (|| (&& (-p- autumn2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- autumn2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- winter2) (next (|| (&& (-p- winter2) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- winter2)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	)))//
+
+/*/Final PowerEx 10mk7 newEnc 19mk7
+(&& 
+(!! (&& (-p- m1w1cool2) (-p- m1w2cool4))) (|| (-p- m1w1cool2) (-p- m1w2cool4)) (next (!! (somf (|| (-p- m1w1cool2) (-p- m1w2cool4)))))
+(!! (&& (-p- m2w2cool1) (-p- m2w3cool2))) (|| (-p- m2w2cool1) (-p- m2w3cool2)) (next (!! (somf (|| (-p- m2w2cool1) (-p- m2w3cool2)))))
+(!! (&& (-p- powerw2cool2) (-p- powerw3cool1))) (|| (-p- powerw2cool2) (-p- powerw3cool1)) (next (!! (somf (|| (-p- powerw2cool2) (-p- powerw3cool1)))))
+	(-> (-p- powerw3cool1) (alwf (!! (&& (-p- m1) (-p- m2)))))
+
+//m1w1cool2: 1W-2Cool
+(-> (-p- m1w1cool2) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 1) (next ([>] (-v- c1) 1)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 1) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//m1w2cool4: 2W-4Cool
+(-> (-p- m1w2cool4) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 2) (next ([>] (-v- c1) 2)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 4) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//M2Mode1: 2W-1Cool
+(-> (-p- m2w2cool1) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 2) (next ([>] (-v- c2) 2)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 1) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+//M2Mode2: 3W-2Cool
+(-> (-p- m2w3cool2) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 3) (next ([>] (-v- c2) 3)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 3) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+
+//powerw2cool2: Supports 2 Machines, 2W-2Cool
+(-> (-p- powerw2cool2) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 2) (next ([>] (-v- c3) 2)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+//powerw3cool1: Supports 1 Machine, 3W-1Cool
+(-> (-p- powerw3cool1) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 3) (next ([>] (-v- c3) 3)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 3) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 1) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+
+(alwf (&&
+(iw (-p- m1) 1) (iw (-p- m2) 1)
+(-> (-p- m1) (-p- power)) (-> (-p- m2) (-p- power))
+	))
+)/*/
+
+/*/Double manufacturing machine//Final 10mk8 costHAvg 1.96875 costLSum 2.75
+(&& //([<] (-v- z) 7)
+([=] (new (-v- z)) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (new (-v- x1)) 0) ([=] (new (-v- x2)) 0) 
+(alwf (&&
+	(!! (&& ([<] (new (-v- x1)) 3) (next ([>] (-v- x1) 3)))) (!! (&& ([<] (new (-v- x2)) 6) (next ([>] (-v- x2) 6))))
+	(-> (-p- high1) ([<] (new (-v- x1)) 3)) (-> (-p- high2) ([<] (new (-v- x2)) 6))
+	(-> (-p- high1) (|| (-p- att1) (yesterday (-p- high1)))) (-> (-p- high2) (|| (-p- att2) (yesterday (-p- high2))))
+	(-> (&& (-p- high1) (next (-p- low1))) (next ([=] (-v- x1) 3)))		(-> (&& (-p- high2) (next (-p- low2))) (next ([=] (-v- x2) 6)))
+	(iw (-p- high1) 1.75) //(iw (-p- low1) 0.75) (iw (-p- high1) 2.5)
+	(iw (-p- high2) 1) //(iw (-p- low2) 1.5) (iw (-p- high2) 2.5)
+	(<-> (-p- high1) (!! (-p- low1))) 										(<-> (-p- high2) (!! (-p- low2)))
+))
+(next (alwf (&&
+	(-> (-p- att) ([>=] (-v- z) 4))
+	(-> (-p- att1) ([=] (new (-v- x1)) 0))									(-> (-p- att2) ([=] (new (-v- x2)) 0))
+	(-> ([=] (new (-v- x1)) 0) (|| (-p- att1) (-p- low1)))	(-> ([=] (new (-v- x2)) 0) (|| (-p- att2) (-p- low2)))
+	(-> (-p- low1) ([=] (new (-v- x1)) 0)) (-> (-p- low2) ([=] (new (-v- x2)) 0))
+	(<-> (-p- att) (|| (-p- att1) (-p- att2)))
+	(!! (&& (-p- att1) (-p- att2)))
+	(-> (-p- att) ([=] (new (-v- z)) 0))
+		))))/*/
+
+/*/Single manufacturing machine//Final 5s-k5 (costHAvg 0.4375)
+(&& //([<] (-v- z) 5)
+([=] (new (-v- z)) 0) (!! (-p- low)) ([=] (new (-v- x)) 0) (-p- high) (next (-p- high))
+(alwf (iw (-p- high) 1.75))
+(next (alwf (&&
+	(-> (-p- high) ([<] (new (-v- x)) 3))
+	(-> (&& (-p- high) (next (-p- low))) (next ([=] (-v- x) 3)))
+	(<-> (-p- high) (!! (-p- low)))
+	(<-> ([=] (new (-v- z)) 0) ([>=] (-v- z) 4))
+	(<-> ([=] (new (-v- x)) 0) ([=] (new (-v- z)) 0))
+	(!! (&& ([<] (new (-v- x)) 3) (next ([>] (-v- x) 3))))
+		))))/*/
+
+
+/*/
+(&& (iw (-p- point) 2.22) (iw (-p- interval) 3.33)
+	([>] (-v- bbb) 3))
+/*/
+
+
+
+
+//microprocessor
+//examples of manufacturing systems
+
+
+
+
+//Single manufacturing machine//Finalized
+(&&
+([=] (-v- z1) 0) (!! (-p- low)) ([=] (-v- x) 0) 
+(-p- high) (!! (-p- test_zge4))
+(alwf (&&
+	//(-> ([=] (-v- x) 0) (next (until (!! ([=] (-v- x) 0)) ([=] (-v- x) 3))))
+	(-> ([>] (-v- x) 3) (yesterday ([>=] (-v- x) 3)))
+
+	//(-> ([=] (-v- z1) 0) (!! (next (until ([>] (-v- z2) 0) ([=] (-v- z1) 0)))))
+	//(-> ([=] (-v- z2) 0) (!! (next (until ([>] (-v- z1) 0) ([=] (-v- z2) 0)))))
+	(-> (next ([=] (-v- z1) 0)) ([>=] (-v- z1) (-v- z2))) //phi6
+	(-> (next ([=] (-v- z2) 0)) ([>=] (-v- z2) (-v- z1))) //phi6
+	))
+(next (alwf (&&
+	(<-> (-p- high) (!! (-p- low)))
+	(<-> (-p- high) ([<] (-v- x) 3))
+	(<-> (-p- att) ([=] (-v- x) 0))
+	(-> (-p- att) (-p- high))
+	(w (-p- low) 0.75) (w (-p- high) 2.5)
+	(<-> (-p- rst_z) (-p- att))
+	(!! (&& ([=] (-v- z1) 0) ([=] (-v- z2) 0)))
+	(<-> (-p- rst_z) (|| ([=] (-v- z1) 0) ([=] (-v- z2) 0)))
+	(<-> (-p- test_zge4) (|| (&& ([>=] (-v- z1) 4) (|| ([>=] (-v- z2) 4) ([=] (-v- z2) 0))) (&& ([>=] (-v- z2) 4) (|| ([>=] (-v- z1) 4) ([=] (-v- z1) 0)))))
+	(<-> (-p- test_zge4) (-p- rst_z))
+		))))
+
+/*/Double manufacturing machine//98s-k7 756s-k8
+//We need twin clocks for x1 and x2
+(&&
+([=] (-v- z1) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (-v- x1) 0)([=] (-v- x2) 0) 
+(-p- high1) (-p- high2) (!! (-p- test_zge4))
+(alwf (&&
+	//(-> ([=] (-v- x1) 0) (next (until (!! ([=] (-v- x1) 0)) (|| (-p- att1) ([=] (-v- x1) 3)))))
+	//(-> ([=] (-v- x2) 0) (next (until (!! ([=] (-v- x2) 0)) (|| (-p- att2) ([=] (-v- x2) 6)))))
+	(-> (next ([=] (-v- z1) 0)) ([>=] (-v- z1) (-v- z2))) //phi6
+	(-> (next ([=] (-v- z2) 0)) ([>=] (-v- z2) (-v- z1))) //phi6
+	))
+(next (alwf (&&
+	(<-> (-p- high1) (!! (-p- low1))) (<-> (-p- high2) (!! (-p- low2)))
+	(<-> (-p- high1) ([<] (-v- x1) 3)) (<-> (-p- high2) ([<] (-v- x2) 6))
+	(<-> (-p- att1) ([=] (-v- x1) 0)) (<-> (-p- att2) ([=] (-v- x2) 0))
+	(-> (-p- att1) (-p- high1)) (-> (-p- att2) (-p- high2))
+	(w (-p- low1) 0.75) (w (-p- high1) 2.5)
+	(w (-p- low2) 1.5) (w (-p- high2) 2.5)
+	(<-> (-p- rst_z) (-p- att)) (<-> (-p- att) (|| (-p- att1) (-p- att2)))
+	(!! (&& (-p- att1) (-p- att2)))
+	(!! (&& ([=] (-v- z1) 0) ([=] (-v- z2) 0)))
+	(<-> (-p- rst_z) (|| ([=] (-v- z1) 0) ([=] (-v- z2) 0)))
+	(<-> (-p- test_zge4) (|| (&& ([>=] (-v- z1) 4) (|| ([>=] (-v- z2) 4) ([=] (-v- z2) 0))) (&& ([>=] (-v- z2) 4) (|| ([>=] (-v- z1) 4) ([=] (-v- z1) 0)))))
+	(<-> (-p- test_zge4) (-p- rst_z))
+		))))/*/
+
+
+/*
+(&& //0 seconds
+	([=] (-v- gc) 0)
+	([=] (-v- c) 0)
+	(-p- state0)
+	(somf(-p- state2))
+	(alw (&&
+	(<-> (-p- bb) (!!(-p- good)))
+		(|| (-p- state0)(-p- state1)(-p- state2)) 
+		(!!(&& (-p- state0)(-p- state1))) (!!(&& (-p- state0)(-p- state2))) (!!(&& (-p- state1)(-p- state2)))
+		(<-> (-p- good) (!! (-p- state1)))
+		//(<-> (-p- good) (!! (|| (-p- state1)(-p- state2))))
+		(w (-p- good) 1)
+		(-> (&& (!!(-p- state1)) (next (-p- state1))) (next ([<] (-v- c) 1)))
+		(-> (&& (-p- state1) (next (!!(-p- state1)))) ([>] (-v- c) 2))
+		(-> (-p- state0) (next (!! (-p- state2))))
+	(-> (-p- state2) (next (-p- state2))))))
+*/
+
+/*
+(&& //v4k5-19s 300k10 v5k10-800 v6k10-90s v6k5-4s	
+([=] (-v- ccc1) 0)
+(alw (&&
+	(<-> (-p- good) (!!(-p- bad)))
+	  (w (-p- good) 1)
+	(-> (-p- good) ([<] (-v- ccc1) 4))
+	(<-> (-p- bad) ([=] (-v- ccc2) 0))
+	(somf (-p- bad))	
+	)))
+
+*/
+/*
+(&& 
+([=] (-v- c1) 0)([=] (-v- c2) 0)([=] (-v- c3) 0)
+(next (&& (!!([=] (-v- c1) 0)) ([=] (-v- c2) 0)(!!([=] (-v- c3) 0))))
+(next (next (&& (!!([=] (-v- c1) 0)) (!!([=] (-v- c2) 0)([=] (-v- c3) 0))))))
+*/
+
+/*(&&
+([=] (new (-v- x)) 0) 
+(next (alwf (<-> ([=] (new (-v- x)) 0) ([>=] (-v- x) 4))))
+(next (alwf (-> ([>] (-v- x) 3) (yesterday ([>=] (-v- x) 3)))))
+(alwf (&&
+(<-> (-p- high) (!!(-p- low)))
+(<-> ([>=] (-v- x) 3) (-p- low))
+	)))*/
+
+/*/
+(&& (-p- spring) ([=] (new (-v- x)) 0) (somf (&& 
+	([=] (new (-v- x)) 0)
+	 ([=] (-v- x) 3)
+	 ))
+	(alwf(somf(-p- spring)))
+	(alwf(somf(-p- summer)))
+	(alwf(somf(-p- fall)))
+	(alwf(somf(-p- winter)))
+	(alwf (&& (w (-p- spring) 1)
+	(!!(&& (-p- spring) (-p- summer)))
+	(!!(&& (-p- spring) (-p- fall)))
+	(!!(&& (-p- spring) (-p- winter)))
+	(!!(&& (-p- summer) (-p- fall)))
+	(!!(&& (-p- summer) (-p- winter)))
+	(!!(&& (-p- fall) (-p- winter)))
+	(-> (&& (-p- spring) (next (!!(-p- spring)))) (next (-p- summer)))
+	(-> (&& (-p- summer) (next (!!(-p- summer)))) (next (-p- fall)))
+	(-> (&& (-p- fall) (next (!!(-p- fall)))) (next (-p- winter)))
+	(-> (&& (-p- winter) (next (!!(-p- winter)))) (next (-p- spring)))
+
+	(-> (-p- spring) (next (|| (&& (-p- spring) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- spring)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- summer) (next (|| (&& (-p- summer) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- summer)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- fall) (next (|| (&& (-p- fall) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- fall)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- winter) (next (|| (&& (-p- winter) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- winter)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	)))/*/
+
+
+/*/Final PowerEx 10mk7 newEnc 19mk7
+(&& 
+(!! (&& (-p- m1w1cool2) (-p- m1w2cool4))) (|| (-p- m1w1cool2) (-p- m1w2cool4)) (next (!! (somf (|| (-p- m1w1cool2) (-p- m1w2cool4)))))
+(!! (&& (-p- m2w2cool1) (-p- m2w3cool2))) (|| (-p- m2w2cool1) (-p- m2w3cool2)) (next (!! (somf (|| (-p- m2w2cool1) (-p- m2w3cool2)))))
+(!! (&& (-p- powerw2cool2) (-p- powerw3cool1))) (|| (-p- powerw2cool2) (-p- powerw3cool1)) (next (!! (somf (|| (-p- powerw2cool2) (-p- powerw3cool1)))))
+	(-> (-p- powerw3cool1) (alwf (!! (&& (-p- m1) (-p- m2)))))
+
+//m1w1cool2: 1W-2Cool
+(-> (-p- m1w1cool2) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 1) (next ([>] (-v- c1) 1)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 1) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//m1w2cool4: 2W-4Cool
+(-> (-p- m1w2cool4) (alwf (&&
+(-> (-p- m1) (!! (&& ([<] (new (-v- c1)) 2) (next ([>] (-v- c1) 2)))))
+(-> (&& (-p- m1) (next (!! (-p- m1)))) (&& (next (&& ([=] (-v- c1) 2) ([=] (new (-v- c1)) 0)))))
+(-> (&& (-p- m1) (next (-p- m1))) (next (!! ([=] (new (-v- c1)) 0))))
+(-> (&& (!! (-p- m1)) (next (-p- m1))) (&& (next (&& ([>=] (-v- c1) 4) ([=] (new (-v- c1)) 0)))))
+(-> (&& (!! (-p- m1)) (next (!! (-p- m1)))) (next (!! ([=] (new (-v- c1)) 0))))
+	)))
+
+//M2Mode1: 2W-1Cool
+(-> (-p- m2w2cool1) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 2) (next ([>] (-v- c2) 2)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 1) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+//M2Mode2: 3W-2Cool
+(-> (-p- m2w3cool2) (alwf (&&
+(-> (-p- m2) (!! (&& ([<] (new (-v- c2)) 3) (next ([>] (-v- c2) 3)))))
+(-> (&& (-p- m2) (next (!! (-p- m2)))) (&& (next (&& ([=] (-v- c2) 3) ([=] (new (-v- c2)) 0)))))
+(-> (&& (-p- m2) (next (-p- m2))) (next (!! ([=] (new (-v- c2)) 0))))
+(-> (&& (!! (-p- m2)) (next (-p- m2))) (&& (next (&& ([>=] (-v- c2) 2) ([=] (new (-v- c2)) 0)))))
+(-> (&& (!! (-p- m2)) (next (!! (-p- m2)))) (next (!! ([=] (new (-v- c2)) 0))))
+	)))
+
+//powerw2cool2: Supports 2 Machines, 2W-2Cool
+(-> (-p- powerw2cool2) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 2) (next ([>] (-v- c3) 2)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 2) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+//powerw3cool1: Supports 1 Machine, 3W-1Cool
+(-> (-p- powerw3cool1) (alwf (&&
+(-> (-p- power) (!! (&& ([<] (new (-v- c3)) 3) (next ([>] (-v- c3) 3)))))
+(-> (&& (-p- power) (next (!! (-p- power)))) (&& (next (&& ([=] (-v- c3) 3) ([=] (new (-v- c3)) 0)))))
+(-> (&& (-p- power) (next (-p- power))) (next (!! ([=] (new (-v- c3)) 0))))
+(-> (&& (!! (-p- power)) (next (-p- power))) (&& (next (&& ([>=] (-v- c3) 1) ([=] (new (-v- c3)) 0)))))
+(-> (&& (!! (-p- power)) (next (!! (-p- power)))) (next (!! ([=] (new (-v- c3)) 0))))
+	)))
+
+(alwf (&&
+(w (-p- m1) 1) (w (-p- m2) 1)
+(-> (-p- m1) (-p- power)) (-> (-p- m2) (-p- power))
+	))
+)/*/
+
+/*/Double manufacturing machine//Final 10mk8 costHAvg 1.96875 costLSum 2.75
+(&& //([<] (-v- z) 7)
+([=] (new (-v- z)) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (new (-v- x1)) 0) ([=] (new (-v- x2)) 0) 
+(alwf (&&
+	(!! (&& ([<] (new (-v- x1)) 3) (next ([>] (-v- x1) 3)))) (!! (&& ([<] (new (-v- x2)) 6) (next ([>] (-v- x2) 6))))
+	(-> (-p- high1) ([<] (new (-v- x1)) 3)) (-> (-p- high2) ([<] (new (-v- x2)) 6))
+	(-> (-p- high1) (|| (-p- att1) (yesterday (-p- high1)))) (-> (-p- high2) (|| (-p- att2) (yesterday (-p- high2))))
+	(-> (&& (-p- high1) (next (-p- low1))) (next ([=] (-v- x1) 3)))  (-> (&& (-p- high2) (next (-p- low2))) (next ([=] (-v- x2) 6)))
+	(w (-p- high1) 1.75) //(w (-p- low1) 0.75) (w (-p- high1) 2.5)
+	(w (-p- high2) 1) //(w (-p- low2) 1.5) (w (-p- high2) 2.5)
+	(<-> (-p- high1) (!! (-p- low1))) 										(<-> (-p- high2) (!! (-p- low2)))
+))
+(next (alwf (&&
+	(-> (-p- att) ([>=] (-v- z) 4))
+	(-> (-p- att1) ([=] (new (-v- x1)) 0))									(-> (-p- att2) ([=] (new (-v- x2)) 0))
+	(-> ([=] (new (-v- x1)) 0) (|| (-p- att1) (-p- low1)))	(-> ([=] (new (-v- x2)) 0) (|| (-p- att2) (-p- low2)))
+	(-> (-p- low1) ([=] (new (-v- x1)) 0)) (-> (-p- low2) ([=] (new (-v- x2)) 0))
+	(<-> (-p- att) (|| (-p- att1) (-p- att2)))
+	(!! (&& (-p- att1) (-p- att2)))
+	(-> (-p- att) ([=] (new (-v- z)) 0))
+		))))/*/
+
+/*/Single manufacturing machine//Final 5s-k5 (costHAvg 0.6875)
+(&& //([<] (-v- z) 5)
+([=] (new (-v- z)) 0) (!! (-p- low)) ([=] (new (-v- x)) 0) (-p- high) (next (-p- high))
+(alwf (w (-p- high) 1.75))
+(next (alwf (&&
+	(-> (-p- high) ([<] (new (-v- x)) 3))
+	(<-> (-p- high) (!! (-p- low)))
+	(<-> ([=] (new (-v- z)) 0) ([>=] (-v- z) 4))
+	(<-> ([=] (new (-v- x)) 0) ([=] (new (-v- z)) 0))
+	(!! (&& ([<] (new (-v- x)) 3) (next ([>] (-v- x) 3))))
+		))))/*/
+
+/*/Single manufacturing machine// 15s-k5
+(&& ([<] (-v- z) 5)
+([=] (new (-v- z)) 0) (!! (-p- low)) ([=] (new (-v- x)) 0) (-p- high) (next (-p- high))
+(alwf (&&
+(-> (&& (-p- high) (next ([<] (-v- x) 3))) (next (-p- high)))
+(-> (&& (-p- high) (next ([=] (-v- x) 3))) (next (-p- low)))
+(-> (&& (-p- high) (next ([>=] (-v- x) 3))) (next (&& (-p- low) ([=] (-v- x) 3))))
+(!! (&& (-p- high) ([>] (new (-v- x)) 3)))
+(-> (&& (-p- low) (next ([=] (new (-v- x)) 0))) (next (-p- high)))
+(w (-p- low) 0.75) (w (-p- high) 2.5)
+))
+(next (alwf (&&
+	(<-> (-p- high) (!! (-p- low)))
+	//(-> ([=] (new (-v- x)) 0) (yesterday ([>] (new (-v- x)) 3)))
+	(<-> ([=] (new (-v- z)) 0) ([>=] (-v- z) 4))
+	(<-> ([=] (new (-v- x)) 0) ([=] (new (-v- z)) 0))
+		))))/*/
+
+/*/Double manufacturing machine//26m-k8
+(&& ([<] (-v- z) 7)
+([=] (new (-v- z)) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (new (-v- x1)) 0) ([=] (new (-v- x2)) 0) 
+(alwf (&&
+(-> (&& (-p- high1) (next ([<] (-v- x1) 3))) (next (-p- high1))) 			(-> (&& (-p- high2) (next ([<] (-v- x2) 6))) (next (-p- high2)))
+(-> (&& (-p- high1) (next ([=] (-v- x1) 3))) (next (-p- low1))) 			(-> (&& (-p- high2) (next ([=] (-v- x2) 6))) (next (-p- low2)))
+(-> (&& (-p- high1) (next ([>=] (-v- x1) 3))) (next (&& (-p- low1) ([=] (-v- x1) 3)))) 	(-> (&& (-p- high2) (next ([>=] (-v- x2) 6))) (next (&& (-p- low2) ([=] (-v- x2) 6))))
+(!! (&& (-p- high1) ([>] (new (-v- x1)) 3))) 								(!! (&& (-p- high2) ([>] (new (-v- x2)) 6)))
+(-> (&& (-p- low1) (next (-p- att1))) (next (-p- high1)))			(-> (&& (-p- low2) (next (-p- att2))) (next (-p- high2)))
+(w (-p- high1) 1.75) //(w (-p- low1) 0.75) (w (-p- high1) 2.5)
+(w (-p- high2) 1) //(w (-p- low2) 1.5) (w (-p- high2) 2.5)
+(<-> (-p- high1) (!! (-p- low1))) 										(<-> (-p- high2) (!! (-p- low2)))
+))
+(next (alwf (&&
+	(-> (-p- att) ([>=] (-v- z) 4))
+	(-> (-p- att1) ([=] (new (-v- x1)) 0))									(-> (-p- att2) ([=] (new (-v- x2)) 0))
+	(-> ([=] (new (-v- x1)) 0) (|| (-p- att1) (-p- low1)))	(-> ([=] (new (-v- x2)) 0) (|| (-p- att2) (-p- low2)))
+	(-> (-p- low1) ([=] (new (-v- x1)) 0)) (-> (-p- low2) ([=] (new (-v- x2)) 0))
+	(<-> (-p- att) (|| (-p- att1) (-p- att2)))
+	(!! (&& (-p- att1) (-p- att2)))
+	(-> (-p- att) ([=] (new (-v- z)) 0))
+		))))/*/
+
+/*/OLD Double manufacturing machine//41min-k7 4/14.75
+(&&
+([=] (new (-v- z)) 0) (!! (-p- low1)) (!! (-p- low2)) ([=] (new (-v- x1)) 0)([=] (new (-v- x2)) 0) 
+(-p- high1) (-p- high2)
+(somf ([>] (new (-v- x2)) 6))
+(alwf (&&
+	(-> ([>] (-v- x1) 3) (yesterday (since ([>=] (new (-v- x1)) 3) ([=] (new (-v- x1)) 3))))
+	//(-> ([>] (-v- x2) 6) (yesterday (since ([>=] (new (-v- x2)) 6) ([=] (new (-v- x2)) 6))))
+	//(-> ([>] (-v- x2) 6) (yesterday (since ([>=] (new (-v- x2)) 0) ([>] (new (-v- x2)) 5))))
+	))
+(next (alwf (&&
+	(<-> (-p- high1) (!! (-p- low1))) (<-> (-p- high2) (!! (-p- low2)))
+	(<-> (-p- high1) ([<] (new (-v- x1)) 3)) (<-> (-p- high2) ([<] (new (-v- x2)) 6))
+	(<-> (-p- att) (|| (-p- att1) (-p- att2))) (!! (&& (-p- att1) (-p- att2)))
+	(<-> (-p- att) ([=] (new (-v- z)) 0))
+	(<-> (-p- att1) ([=] (new (-v- x1)) 0)) (<-> (-p- att2) ([=] (new (-v- x2)) 0))
+	(-> ([=] (new (-v- x1)) 0) ([=] (new (-v- z)) 0))
+	(-> ([=] (new (-v- x2)) 0) ([=] (new (-v- z)) 0))
+	(-> (-p- att1) (-p- high1)) (-> (-p- att2) (-p- high2))
+	//(w (-p- low1) 0.75) (w (-p- high1) 2.5)
+	//(w (-p- low2) 1.5) (w (-p- high2) 2.5)
+	(<-> ([=] (new (-v- z)) 0) ([>=] (-v- z) 4))
+		))))/*/
+
+
+/*/
+(&& (w (-p- point) 2.22) (iw (-p- interval) 3.33)
+	([>] (-v- bbb) 3))
+/*/
+
+
+/*Spring
+	plant1: Snowdrops	at least 3 months,		profit 6.2
+	plant2: Lilies	2 ,		3.8
+
+	Summer 
+	plant3: Tomatoes	2,4.1
+	plant4: Peppers	2,4.2
+
+	Autumn
+	plant5: Chrysanthemums	5, 10
+	plant6: Kale	1, 2.1
+
+	Winter
+	plant7: Violas	3, 6.1
+	plant8: Carrots	2, 3.7
+	Lettuce	1, 2.1
+	Cucumbers	2, 4.1
+
+
+	*///Planting Ex
+(&& 
+
+	(-p- winter) (next (-p- spring)) ([=] (new (-v- x)) 0) //(somf (&& ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))
+
+(next (-p- end) 15) 
+(next (!! (-p- end)) 14) (next (!! (-p- end)) 13) (next (!! (-p- end)) 12) (next (!! (-p- end)) 11) (next (!! (-p- end)) 10)
+(next (!! (-p- end)) 9) (next (!! (-p- end)) 8) (next (!! (-p- end)) 7) (next (!! (-p- end)) 6) (next (!! (-p- end)) 5) (next (!! (-p- end)) 4) (next (!! (-p- end)) 3) (next (!! (-p- end)) 2) (next (!! (-p- end))) (!! (-p- end))
+
+(alwf (-> (&& (-p- spring) (next (!! (-p- spring)))) (next (!! (until (!! (-p- end)) (-p- spring))))))//only 1 year in the loop
+
+	(!! (next (somf (-p- somePlant1))))
+	(<-> (-p- somePlant1) (somf (-p- plant1)))
+	(w (-p- somePlant1) 6.2)
+
+	(!! (next (somf (-p- somePlant2))))
+	(<-> (-p- somePlant2) (somf (-p- plant2)))
+	(w (-p- somePlant2) 3.8)
+
+	(!! (next (somf (-p- somePlant3))))
+	(<-> (-p- somePlant3) (somf (-p- plant3)))
+	(w (-p- somePlant3) 4.1)
+
+	(!! (next (somf (-p- somePlant4))))
+	(<-> (-p- somePlant4) (somf (-p- plant4)))
+	(w (-p- somePlant4) 4.2)
+
+	(!! (next (somf (-p- somePlant5))))
+	(<-> (-p- somePlant5) (somf (-p- plant5)))
+	(w (-p- somePlant5) 10)
+
+	(!! (next (somf (-p- somePlant6))))
+	(<-> (-p- somePlant6) (somf (-p- plant6)))
+	(w (-p- somePlant6) 2.1)
+
+	(!! (next (somf (-p- somePlant7))))
+	(<-> (-p- somePlant7) (somf (-p- plant7)))
+	(w (-p- somePlant7) 6.1)
+
+	(!! (next (somf (-p- somePlant8))))
+	(<-> (-p- somePlant8) (somf (-p- plant8)))
+	(w (-p- somePlant8) 3.7)
+
+	(alwf (somf (-p- spring)))
+	(alwf (somf (-p- summer)))
+	(alwf (somf (-p- autumn)))
+	(alwf (somf (-p- winter)))
+	(alwf (&& 
+
+	(-> (-p- plant1) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant2) (!! (|| (-p- plant1) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant3) (!! (|| (-p- plant2) (-p- plant1) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant4) (!! (|| (-p- plant2) (-p- plant3) (-p- plant1) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant5) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant1) (-p- plant6) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant6) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant1) (-p- plant7) (-p- plant8))))
+	(-> (-p- plant7) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant1) (-p- plant8))))
+	(-> (-p- plant8) (!! (|| (-p- plant2) (-p- plant3) (-p- plant4) (-p- plant5) (-p- plant6) (-p- plant7) (-p- plant1))))
+	
+	(-> ([=] (new (-v- plant)) 0) (|| 
+		(&& (-p- plant1) (!! (yesterday (-p- plant1)))) 
+		(&& (-p- plant2) (!! (yesterday (-p- plant2))))
+		(&& (-p- plant3) (!! (yesterday (-p- plant3)))) 
+		(&& (-p- plant4) (!! (yesterday (-p- plant4))))
+		(&& (-p- plant5) (!! (yesterday (-p- plant5))))
+		(&& (-p- plant6) (!! (yesterday (-p- plant6))))
+		(&& (-p- plant7) (!! (yesterday (-p- plant7))))
+		(&& (-p- plant8) (!! (yesterday (-p- plant8))))
+	))
+
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant1))) (-p- plant1)) (&& (-p- spring) (until (-p- plant1) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant2))) (-p- plant2)) (&& (-p- spring) (until (-p- plant2) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant3))) (-p- plant3)) (&& (-p- summer) (until (-p- plant3) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant4))) (-p- plant4)) (&& (-p- summer) (until (-p- plant4) ([=] (-v- plant) 2))))
+
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant5))) (-p- plant5)) (&& (-p- autumn) (until (-p- plant5) ([=] (-v- plant) 5))))
+
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant6))) (-p- plant6)) (&& (-p- autumn) (until (-p- plant6) ([=] (-v- plant) 1))))
+
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant7))) (-p- plant7)) (&& (-p- winter) (until (-p- plant7) ([=] (-v- plant) 3))))
+
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) ([=] (new (-v- plant)) 0))
+	(-> (&& (!! (yesterday (-p- plant8))) (-p- plant8)) (&& (-p- winter) (until (-p- plant8) ([=] (-v- plant) 2))))
+
+
+
+
+	(!! (&& (-p- spring) (-p- summer)))
+	(!! (&& (-p- spring) (-p- autumn)))
+	(!! (&& (-p- spring) (-p- winter)))
+	(!! (&& (-p- summer) (-p- autumn)))
+	(!! (&& (-p- summer) (-p- winter)))
+	(!! (&& (-p- autumn) (-p- winter)))
+	(-> (&& (-p- spring) (next (!!(-p- spring)))) (next (-p- summer)))
+	(-> (&& (-p- summer) (next (!!(-p- summer)))) (next (-p- autumn)))
+	(-> (&& (-p- autumn) (next (!!(-p- autumn)))) (next (-p- winter)))
+	(-> (&& (-p- winter) (next (!!(-p- winter)))) (next (-p- spring)))
+
+	(-> (-p- spring) (next (|| (&& (-p- spring) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- spring)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- summer) (next (|| (&& (-p- summer) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- summer)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- autumn) (next (|| (&& (-p- autumn) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- autumn)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	(-> (-p- winter) (next (|| (&& (-p- winter) (!! ([=] (new (-v- x)) 0)) ([<] (new (-v- x)) 3)) (&& (!! (-p- winter)) ([=] (new (-v- x)) 0) ([=] (-v- x) 3)))))
+	)))//

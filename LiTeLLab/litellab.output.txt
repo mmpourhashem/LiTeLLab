@@ -1,0 +1,97 @@
+--- time 0 ---
+M3S
+setup
+M3R
+M3O
+--- time 1 ---
+M1S
+setup
+M1R
+M3R
+M1O
+M3O
+--- time 2 ---
+M4O
+M4S
+setup
+M4R
+M1R
+M3R
+M3O
+--- time 3 ---
+M4O
+M2S
+setup
+M2R
+M2O
+M4R
+M1R
+M3R
+M3O
+--- time 4 ---
+M4O
+M5S
+M5R
+setup
+M2R
+M5O
+M4R
+M1R
+M3R
+M3O
+--- time 5 ---
+M6O
+M6S
+M5R
+setup
+M2R
+M4R
+M1R
+M6R
+M3R
+M3O
+--- time 6 ---
+M7R
+M5R
+M7O
+setup
+M2R
+M7S
+M4R
+M1R
+M6R
+M3R
+--- time 7 ---
+*LOOP*
+M7R
+M5R
+M7O
+M2R
+M4R
+M1R
+M6R
+M8S
+M3R
+--- time 8 ---
+M7R
+M5R
+M7O
+M2R
+M4R
+M1R
+M6R
+M3R
+--- time 9 ---
+M7R
+M5R
+M7O
+M2R
+M4R
+M1R
+M6R
+M8S
+M3R
+
+ costHAvg 18
+ costLSum 1988
+
