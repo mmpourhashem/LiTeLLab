@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class LiTeLLab {
 
@@ -55,12 +54,12 @@ public class LiTeLLab {
 				LiTeLLab.run(or3.getOLTLScript(), "OR4SR9", or3.getBound(), -1);
 				//		</Run Operation room case study>
 			}
-			else if (args[0].equals("al")) {
-				//		<Run Assembly line case study>
-				AssemblyLine al = new AssemblyLine(7);
-				LiTeLLab.run(al.getOLTLScript(), "AL7", 10, -1);
-				//		</Run Assembly line case study>
-			}
+//			else if (args[0].equals("al")) {
+//				//		<Run Assembly line case study>
+//				AssemblyLine al = new AssemblyLine(7);
+//				LiTeLLab.run(al.getOLTLScript(), "AL7", 10, -1);
+//				//		</Run Assembly line case study>
+//			}
 			else {
 				String oltlScript = "";
 				try	{
@@ -108,8 +107,8 @@ public class LiTeLLab {
 			//				oltlScript = new String (Files.readAllBytes(Paths.get("litellab.input.txt")));
 			//				LiTeLLab.run(oltlScript, boundInMode2, -1);
 			//			} catch (IOException e) {e.printStackTrace();}
-			AssemblyLine al = new AssemblyLine(0);
-			LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
+			AssemblyLine al = new AssemblyLine();
+//			LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
 			//
 			//			OperatingRoom or = new OperatingRoom(4, 7);
 			//			LiTeLLab.run(or.getOLTLScript(), "OR4SR7", or.getBound());	
@@ -142,7 +141,7 @@ public class LiTeLLab {
 	}
 
 	public static void run(String script, String testCase, int bound, int m) {
-		writeSpecToFile(script, "");
+		writeToFile(script, "");
 	//		SMT2Builder sb = new SMT2Builder(script, bound, m);
 	//		writeSMT2(sb.getSMT2Model());
 	//		parseOutput(sb.getModel(), testCase, false);
@@ -184,13 +183,13 @@ public class LiTeLLab {
 		}
 	}
 
-	public static void writeSpecToFile(String formula, String fileName) {
+	public static void writeToFile(String text, String fileName) {
 		if (fileName.length() == 0)
 			fileName = "generatedlitellab.input.txt";
 		try {
 			FileWriter fw = new FileWriter(fileName);
 			BufferedWriter out = new BufferedWriter(fw);
-			out.write(formula);
+			out.write(text);
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();

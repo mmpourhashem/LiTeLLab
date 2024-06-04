@@ -1,97 +1,87 @@
 --- time 0 ---
+noSomeM5S
+M3R
+M3O
+noSomeM6S
+noSomeM7S
 M3S
 setup
-M3R
-M3O
+noSomeM8S
 --- time 1 ---
-M1S
-setup
+noSomeM5S
 M1R
 M3R
-M1O
 M3O
+M1S
+noSomeM6S
+M1O
+noSomeM7S
+setup
+noSomeM8S
 --- time 2 ---
+noSomeM5S
+M4R
+M1R
+M3R
+M3O
 M4O
+noSomeM6S
+noSomeM7S
 M4S
 setup
+noSomeM8S
+--- time 3 ---
+M2O
+noSomeM5S
 M4R
 M1R
 M3R
 M3O
---- time 3 ---
 M4O
 M2S
-setup
 M2R
-M2O
-M4R
-M1R
-M3R
-M3O
+noSomeM6S
+noSomeM7S
+setup
+noSomeM8S
 --- time 4 ---
-M4O
-M5S
-M5R
-setup
-M2R
-M5O
-M4R
-M1R
-M3R
-M3O
---- time 5 ---
-M6O
-M6S
-M5R
-setup
-M2R
-M4R
-M1R
-M6R
-M3R
-M3O
---- time 6 ---
-M7R
-M5R
-M7O
-setup
-M2R
-M7S
-M4R
-M1R
-M6R
-M3R
---- time 7 ---
 *LOOP*
-M7R
-M5R
-M7O
-M2R
+M2O
+noSomeM5S
 M4R
 M1R
-M6R
-M8S
 M3R
---- time 8 ---
-M7R
-M5R
-M7O
+M3O
+M4O
 M2R
+noSomeM6S
+noSomeM7S
+noSomeM8S
+--- time 5 ---
+M2O
+noSomeM5S
 M4R
 M1R
-M6R
 M3R
---- time 9 ---
-M7R
-M5R
-M7O
+M3O
+M4O
 M2R
+noSomeM6S
+noSomeM7S
+noSomeM8S
+--- time 6 ---
+M2O
+noSomeM5S
 M4R
 M1R
-M6R
-M8S
 M3R
+M3O
+M4O
+M2R
+noSomeM6S
+noSomeM7S
+noSomeM8S
 
- costHAvg 18
- costLSum 1988
+ costHAvg 43
+ costLSum 660
 
