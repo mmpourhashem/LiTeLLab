@@ -1,6 +1,0 @@
-(alwf(&&
-([<=] (old (-v- x)) 2)
-(<-> (-p- xGTy) ([>] (-v- x) (-v- y)))
-(<-> (-p- bothReset) (&& ([=] (-v- x) 0) ([=] (-v- y) 0)))
-(w (-p- bothReset) 6)
-(iw (-p- xGTy) 6)))

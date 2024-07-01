@@ -1,0 +1,5 @@
+(&& (next (-p- end) 10) (next (alwp (!! (-p- end))) 9)
+(next (-p- a) 8)
+(somf (&& (!! (-p- end)) (-p- a))
+(!! (somf (&& (!! (-p- end)) (!!(-> (-p- a) (next (&& (!!(-p- end))(-p- b)) 4))))))
+	)

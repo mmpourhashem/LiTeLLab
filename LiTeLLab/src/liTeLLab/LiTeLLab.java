@@ -19,6 +19,9 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LiTeLLab {
 
@@ -54,12 +57,12 @@ public class LiTeLLab {
 				LiTeLLab.run(or3.getOLTLScript(), "OR4SR9", or3.getBound(), -1);
 				//		</Run Operation room case study>
 			}
-//			else if (args[0].equals("al")) {
-//				//		<Run Assembly line case study>
-//				AssemblyLine al = new AssemblyLine(7);
-//				LiTeLLab.run(al.getOLTLScript(), "AL7", 10, -1);
-//				//		</Run Assembly line case study>
-//			}
+			//			else if (args[0].equals("al")) {
+			//				//		<Run Assembly line case study>
+			//				AssemblyLine al = new AssemblyLine(7);
+			//				LiTeLLab.run(al.getOLTLScript(), "AL7", 10, -1);
+			//				//		</Run Assembly line case study>
+			//			}
 			else {
 				String oltlScript = "";
 				try	{
@@ -107,8 +110,26 @@ public class LiTeLLab {
 			//				oltlScript = new String (Files.readAllBytes(Paths.get("litellab.input.txt")));
 			//				LiTeLLab.run(oltlScript, boundInMode2, -1);
 			//			} catch (IOException e) {e.printStackTrace();}
-			AssemblyLine al = new AssemblyLine();
-//			LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
+			//			AssemblyLine al = new AssemblyLine();
+			//			LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
+
+
+
+			//			List<String>[][] table = parseFile("OR_SN6_SR15_OR5.output.txt");
+			//	        printTable(table);
+			
+			writeToCSV(parseFile("output.txt"), "result.csv");
+			
+			boolean orScalability = false;
+//			boolean orScalability = true;
+			if (orScalability) {
+				for (int nSN = 4; nSN <= 15; nSN++) {
+//					OperatingRoomScAn or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN);
+					OperatingRoomScAn or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 1);
+					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 2);
+					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 3);					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 4);
+				}
+			}
 			//
 			//			OperatingRoom or = new OperatingRoom(4, 7);
 			//			LiTeLLab.run(or.getOLTLScript(), "OR4SR7", or.getBound());	
@@ -142,28 +163,28 @@ public class LiTeLLab {
 
 	public static void run(String script, String testCase, int bound, int m) {
 		writeToFile(script, "");
-	//		SMT2Builder sb = new SMT2Builder(script, bound, m);
-	//		writeSMT2(sb.getSMT2Model());
-	//		parseOutput(sb.getModel(), testCase, false);
-	//		OLTLFormula.ltlInstances = new ArrayList<OLTLFormula>();
-	//		Predicate.instances = new HashSet<Predicate>();
-	//		Predicate.ltlInstances = new ArrayList<OLTLFormula>();
-	//		WAP.instances = new HashSet<WAP>();
-	//		WAP.ltlInstances = new ArrayList<OLTLFormula>();
-	//		// System.out.println(sb.getSMT2Model());
-	//		if (testCase.length() > 0) {
-	//			File z3Input = new File("./z3.input.smt2");
-	//			File z3InputNew = new File("./" + testCase + "-z3.input.smt2");
-	//			z3Input.renameTo(z3InputNew);
-	//			File z3Output = new File("./z3.output.txt");
-	//			File z3OutputNew = new File("./" + testCase + "-z3.output.txt");
-	//			z3Output.renameTo(z3OutputNew);
-	//			File file = new File("./" + testCase + "-litellab.output.txt");
-	//			file.delete();
-	//			File oltlOutput = new File("./litellab.output.txt");
-	//			File oltlOutputNew = new File("./" + testCase + "-litellab.output.txt");
-	//			oltlOutput.renameTo(oltlOutputNew);
-	//		}
+		//		SMT2Builder sb = new SMT2Builder(script, bound, m);
+		//		writeSMT2(sb.getSMT2Model());
+		//		parseOutput(sb.getModel(), testCase, false);
+		//		OLTLFormula.ltlInstances = new ArrayList<OLTLFormula>();
+		//		Predicate.instances = new HashSet<Predicate>();
+		//		Predicate.ltlInstances = new ArrayList<OLTLFormula>();
+		//		WAP.instances = new HashSet<WAP>();
+		//		WAP.ltlInstances = new ArrayList<OLTLFormula>();
+		//		// System.out.println(sb.getSMT2Model());
+		//		if (testCase.length() > 0) {
+		//			File z3Input = new File("./z3.input.smt2");
+		//			File z3InputNew = new File("./" + testCase + "-z3.input.smt2");
+		//			z3Input.renameTo(z3InputNew);
+		//			File z3Output = new File("./z3.output.txt");
+		//			File z3OutputNew = new File("./" + testCase + "-z3.output.txt");
+		//			z3Output.renameTo(z3OutputNew);
+		//			File file = new File("./" + testCase + "-litellab.output.txt");
+		//			file.delete();
+		//			File oltlOutput = new File("./litellab.output.txt");
+		//			File oltlOutputNew = new File("./" + testCase + "-litellab.output.txt");
+		//			oltlOutput.renameTo(oltlOutputNew);
+		//		}
 	}
 
 	public static void runFromFile() {
@@ -406,6 +427,70 @@ public class LiTeLLab {
 		IntVar(String name, int[] values) {
 			this.name = name;
 			this.values = values;
+		}
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public static List<String>[][] parseFile(String filename) {
+		List<String>[][] table = new ArrayList[20][20];
+
+		for (int i = 0; i < table.length; i++) {
+			for (int j = 0; j < table[i].length; j++) {
+				table[i][j] = new ArrayList<>();
+			}
+		}
+
+		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+			String line;
+			Pattern timePattern = Pattern.compile("--- time (\\d+) ---");
+			Pattern orPattern = Pattern.compile("OR(\\d+)(SR\\d+|SR\\d+C|SR\\d+P|SN\\d+)");
+			int currentTime = -1;
+
+			while ((line = br.readLine()) != null) {
+				Matcher timeMatcher = timePattern.matcher(line);
+				if (timeMatcher.find()) {
+					currentTime = Integer.parseInt(timeMatcher.group(1));
+				} else if (!line.startsWith("Soft") && currentTime != -1) {
+					Matcher orMatcher = orPattern.matcher(line);
+					if (orMatcher.find()) {
+						int orIndex = Integer.parseInt(orMatcher.group(1));
+						String value = orMatcher.group(2);
+						table[orIndex][currentTime].add(value);
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return table;
+	}
+
+	public static void printTable(List<String>[][] table) {
+		for (int i = 0; i < table.length; i++) {
+			for (int j = 0; j < table[i].length; j++) {
+				System.out.print((table[i][j].isEmpty() ? "null" : table[i][j].toString()) + "\t");
+			}
+			System.out.println();
+		}
+	}
+
+	public static void writeToCSV(List<String>[][] table, String filename) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+			for (int i = 0; i < table.length; i++) {
+				for (int j = 0; j < table[i].length; j++) {
+					List<String> cellValues = table[i][j];
+					String cellValue = cellValues.isEmpty() ? "null" : String.join("- ", cellValues);
+					bw.write(cellValue);
+					if (j < table[i].length - 1) {
+						bw.write(",");
+					}
+				}
+				bw.newLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

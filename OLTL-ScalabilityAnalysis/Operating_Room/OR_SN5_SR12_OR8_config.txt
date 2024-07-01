@@ -1,0 +1,3 @@
+SurgeryConfig{surgeryID=10, surgeonID=5, surgeryTime=3, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=11, surgeonID=5, surgeryTime=3, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=12, surgeonID=5, surgeryTime=1, preparationTime=1, cleaningTime=1}

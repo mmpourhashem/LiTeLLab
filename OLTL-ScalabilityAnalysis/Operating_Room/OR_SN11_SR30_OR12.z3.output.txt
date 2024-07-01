@@ -1,0 +1,36 @@
+timeout
+(:max-memory              9082.92
+ :maxsat-cores            16
+ :memory                  7307.14
+ :num-allocs              67156548341570.00
+ :rlimit-count            27265589979.00
+ :sat-ate                 20296
+ :sat-backjumps           1356781
+ :sat-backtracks          5987
+ :sat-conflicts           1362784
+ :sat-decisions           4281757
+ :sat-del-clause          5026158
+ :sat-elim-bool-vars-res  113015
+ :sat-elim-clauses        1390401
+ :sat-elim-literals       2353928
+ :sat-gc-clause           1306381
+ :sat-minimized-lits      94602385
+ :sat-mk-clause-2ary      15516850
+ :sat-mk-clause-3ary      207742
+ :sat-mk-clause-nary      5035195
+ :sat-mk-var              1179408
+ :sat-probing-assigned    40767
+ :sat-propagations-2ary   799733753
+ :sat-propagations-nary   4186606462
+ :sat-restarts            116790
+ :sat-scc-elim-binary     32546
+ :sat-scc-elim-vars       2589064
+ :sat-subs-resolution     18928
+ :sat-subs-resolution-dyn 8537650
+ :sat-subsumed            192027
+ :sat-tr                  6332
+ :sat-units               241525
+ :solve-eqs-elim-vars     21028
+ :solve-eqs-steps         94552
+ :time                    7199.46
+ :total-time              7199.13)

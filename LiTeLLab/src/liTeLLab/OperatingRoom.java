@@ -701,12 +701,13 @@ SR6P	SN3	SN3	SN3	SR6C		//#AddSurgery
 		return result;
 	}
 
-	/*SR1P	SR1P	SN1	(SN1 SN2)	SN1	SR1C	
-SR2P	SR2P	SN2	SN2	SN2	SR2C	
-SR3P	SN3	SN3 SN4	(SN3 SN4)	SN3	SR3C	SR3C
-SR4P	SN4	SN4	SN4	SR4C	SR4C	
-SR5P	SN1	SN1	SN1	SR5C		
-SR6P	SN3	SN3	SN3	SR6C		
+	/*
+SR1P	SR1P	SN1	(SN1 SN2)	SN1			SR1C	
+SR2P	SR2P	SN2	SN2	SN2					SR2C	
+SR3P	SN3	SN3 SN4	(SN3 SN4) SN3	SR3C	SR3C
+SR4P	SN4	SN4	SN4					SR4C	SR4C	
+SR5P	SN1	SN1	SN1							SR5C		
+SR6P	SN3	SN3	SN3							SR6C		
 //#AddSurgery
 	 */
 
@@ -793,7 +794,7 @@ SR6P	SN3	SN3	SN3	SR6C
 	private ArrayList<OLTLFormula> getSoftNoIdleOr() {
 		ArrayList<OLTLFormula> result = new ArrayList<OLTLFormula>();
 		for (int orIndex = 1; orIndex <= numberOfORs; orIndex++) {
-			Predicate softNoIdleOriP = new Predicate("SoftNoIdleOr" + orIndex);
+			Predicate softNoIdleOriP = new Predicate("SoftNoIdleOR" + orIndex);
 			And and = new And();
 			for (int srIndex = 1; srIndex <= numberOfSurgeries; srIndex++)
 				and.add(new Impl(getORSRPredicate(orIndex, srIndex), (new Or(getSRRelatedPredicates(orIndex, srIndex)))));

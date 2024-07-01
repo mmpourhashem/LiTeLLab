@@ -1,0 +1,9 @@
+SurgeryConfig{surgeryID=10, surgeonID=5, surgeryTime=2, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=11, surgeonID=5, surgeryTime=3, preparationTime=2, cleaningTime=1}
+SurgeryConfig{surgeryID=12, surgeonID=6, surgeryTime=1, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=13, surgeonID=7, surgeryTime=2, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=14, surgeonID=7, surgeryTime=3, preparationTime=2, cleaningTime=1}
+SurgeryConfig{surgeryID=15, surgeonID=6, surgeryTime=1, preparationTime=1, cleaningTime=2}
+SurgeryConfig{surgeryID=16, surgeonID=6, surgeryTime=3, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=17, surgeonID=7, surgeryTime=2, preparationTime=1, cleaningTime=1}
+SurgeryConfig{surgeryID=18, surgeonID=5, surgeryTime=2, preparationTime=1, cleaningTime=1}

@@ -13,57 +13,96 @@ public class AssemblyLine {
 	private int bound;
 
 	public AssemblyLine() {
-		int maxDepth = 3;
-		int maxDegree = 3;
-		String bashScript = "";
-		for (int machineN = 20; machineN <= 30; machineN++) {
-			//			int found = 0;
-			//			while (found < 1) {
-			liTeLLab.AssemblyLine.RandomALGenerator.Machine firstLineRoot;
-			liTeLLab.AssemblyLine.RandomALGenerator.Machine secondLineRoot;
-			Random r = new Random();
-			int firstLineMN = machineN/2 + 1 + r.nextInt(machineN/5);
-			int secondLineMN = machineN - firstLineMN;
-			while (true) {
-				RandomALGenerator generator = new RandomALGenerator(1);
-				firstLineRoot = generator.createRandomTree(firstLineMN, maxDepth + (firstLineMN/10), maxDegree, 0);
-				if (firstLineRoot == null || firstLineRoot.getNodeN() + 1 < firstLineMN)
-					continue;
-				break;
+		int lineN = 2;
+		int maxDepth;
+		int maxDegree;
+		String bashScript;
+
+		if (lineN == 1) {
+			maxDepth = 3;
+			maxDegree = 3;
+			bashScript = "";
+			for (int machineN = 30; machineN <= 40; machineN++) {
+				liTeLLab.AssemblyLine.RandomALGenerator.Machine firstLineRoot;
+				int firstLineMN = machineN;
+				while (true) {
+					RandomALGenerator generator = new RandomALGenerator(1);
+					firstLineRoot = generator.createRandomTree(firstLineMN, maxDepth + (firstLineMN/20), maxDegree, 0);
+					if (firstLineRoot == null || firstLineRoot.getNodeN() + 1 < firstLineMN)
+						continue;
+					break;
+				}
+				for (int sd = machineN; sd > machineN - 4; sd--) {
+					String modelName = "M" + machineN + "-sd" + sd + "-k" + (sd + 1);
+					String inputFileName = modelName + ".input.txt";
+					bashScript += "java -jar litellab.jar " + inputFileName + " -k " + (sd + 1) + "\n"
+							+ "mv z3.output.txt " + modelName + ".z3.output.txt\n"
+							+ "mv litellab.output.txt " + modelName + ".output.txt\n\n";
+					LiTeLLab.writeToFile(getTreeAxioms(firstLineRoot, firstLineMN, sd).toString(), inputFileName);
+					LiTeLLab.writeToFile(firstLineRoot.toString(), modelName + ".txt");
+				}
 			}
-			while (true) {
-				RandomALGenerator generator = new RandomALGenerator(firstLineMN + 1);
-				secondLineRoot = generator.createRandomTree(secondLineMN, maxDepth + (secondLineMN/10), maxDegree, 0);
-				if (secondLineRoot == null || secondLineRoot.getNodeN() + 1 < secondLineMN)
-					continue;
-				break;
-			}
-			//				found++;
-			for (int sd = machineN; sd > machineN - 4; sd--) {
-				//					String modelName = "M" + machineN + "-" + found + "-sd" + sd + "-k" + (sd + 1);
-				String modelName = "M" + machineN + "-sd" + sd + "-k" + (sd + 1);
-				String inputFileName = modelName + ".input.txt";
-				bashScript += "java -jar litellab.jar " + inputFileName + " -k " + (sd + 1) + "\n"
-						+ "mv z3.output.txt " + modelName + ".z3.output.txt\n"
-						+ "mv litellab.output.txt " + modelName + ".output.txt\n\n";
-				LiTeLLab.writeToFile(get2TreeAxioms(firstLineRoot, firstLineMN, secondLineRoot, secondLineMN, sd).toString(), inputFileName);
-				LiTeLLab.writeToFile(firstLineRoot.toString() + "\n" + secondLineRoot.toString(), modelName + ".txt");
-			}
-			//			}
+			LiTeLLab.writeToFile(bashScript, "run.sh");
 		}
-		LiTeLLab.writeToFile(bashScript, "run.sh");
+		else if (lineN == 2) {// two lines of machines with the total number of @machineN machines. Maximum machineN is 22 within 2 hours, with 4 different setup deadlines.
+			maxDepth = 3;
+			maxDegree = 2;
+			bashScript = "";
+			for (int machineN = 15; machineN <= 25; machineN++) {
+				liTeLLab.AssemblyLine.RandomALGenerator.Machine firstLineRoot;
+				liTeLLab.AssemblyLine.RandomALGenerator.Machine secondLineRoot;
+				Random r = new Random();
+				int firstLineMN = machineN/2 + 1 + r.nextInt(machineN/5);
+				int secondLineMN = machineN - firstLineMN;
+				while (true) {
+					RandomALGenerator generator = new RandomALGenerator(1);
+					firstLineRoot = generator.createRandomTree(firstLineMN, maxDepth + (firstLineMN/10), maxDegree, 0);
+					if (firstLineRoot == null || firstLineRoot.getNodeN() + 1 < firstLineMN)
+						continue;
+					break;
+				}
+				while (true) {
+					RandomALGenerator generator = new RandomALGenerator(firstLineMN + 1);
+					secondLineRoot = generator.createRandomTree(secondLineMN, maxDepth + (secondLineMN/10), maxDegree, 0);
+					if (secondLineRoot == null || secondLineRoot.getNodeN() + 1 < secondLineMN)
+						continue;
+					break;
+				}
+				for (int sd = machineN; sd > machineN - 4; sd--) {
+					String modelName = "M" + machineN + "-sd" + sd + "-k" + (sd + 1);
+					String inputFileName = modelName + ".input.txt";
+					bashScript += "java -jar litellab.jar " + inputFileName + " -k " + (sd + 1) + "\n"
+							+ "mv z3.output.txt " + modelName + ".z3.output.txt\n"
+							+ "mv litellab.output.txt " + modelName + ".output.txt\n\n";
+					LiTeLLab.writeToFile(get2TreeAxioms(firstLineRoot, firstLineMN, secondLineRoot, secondLineMN, sd).toString(), inputFileName);
+					LiTeLLab.writeToFile(firstLineRoot.toString() + "\n" + secondLineRoot.toString(), modelName + ".txt");
+				}
+			}
+			LiTeLLab.writeToFile(bashScript, "run.sh");
+		}
 	}
-	
+
 	public OLTLFormula get2TreeAxioms(liTeLLab.AssemblyLine.RandomALGenerator.Machine firstLineRoot, int firstLineMN, liTeLLab.AssemblyLine.RandomALGenerator.Machine secondLineRoot, int secondLineMN, int sd) {
 		And result = new And();
 		result.add(getNextM(firstLineRoot.getId(), firstLineRoot.getSetupCost(), firstLineRoot.getProductPrice(), -1, sd));
 		result.add(firstLineRoot.getNextSemantics(sd));
 		result.add(firstLineRoot.getPrevSemantics());
-		
+
 		result.add(getNextM(secondLineRoot.getId(), secondLineRoot.getSetupCost(), secondLineRoot.getProductPrice(), -1, sd));
 		result.add(secondLineRoot.getNextSemantics(sd));
 		result.add(secondLineRoot.getPrevSemantics());
 		result.add(getMutEx(firstLineMN + secondLineMN));
+		result.add(getSetupDeadline(sd));
+
+		return result;
+	}
+
+	public OLTLFormula getTreeAxioms(liTeLLab.AssemblyLine.RandomALGenerator.Machine firstLineRoot, int firstLineMN, int sd) {
+		And result = new And();
+		result.add(getNextM(firstLineRoot.getId(), firstLineRoot.getSetupCost(), firstLineRoot.getProductPrice(), -1, sd));
+		result.add(firstLineRoot.getNextSemantics(sd));
+		result.add(firstLineRoot.getPrevSemantics());
+		result.add(getMutEx(firstLineMN));
 		result.add(getSetupDeadline(sd));
 
 		return result;
