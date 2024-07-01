@@ -4,8 +4,6 @@ The tool entitle LiTeLLab supports OLTL encoding. It initially separates the opt
 
 The jar file can be executed by the command "java -jar litellab Path_to_the_OLTL_script.txt". This runs the OLTL specification written in the file.
 
-Alternatively, any of three case studies ("exam", "or", and "al") can be executed by giving the case study name instead of file path.
-
 Z3 should be installed on the machine and the file runZ3.sh should be modified according to the Z3 installation.
 
 Litellab will prodcues the following files:
