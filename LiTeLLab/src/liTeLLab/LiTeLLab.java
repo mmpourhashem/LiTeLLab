@@ -30,10 +30,9 @@ public class LiTeLLab {
 	public static void main(String[] args) {
 		/*
 		 * 1: Produce Jar file
-		 * 2: Run all experiments OR, Exams, and AL
+		 * 2: Debug mode
 		 */
-		short mode = 2;
-		int boundInMode2 = 2;
+		short mode = 1;
 
 		String help = "The jar file can be executed by the command \"java -jar litellab.jar Path_to_the_OLTL_script.txt -k valueOfK -m valueOfM\"."
 				+ " This runs the OLTL/OCLTLoc specification written in the file.\n\nAlternatively, any of three case studies (\"exam\", \"or\", and  \"al\") "
@@ -45,24 +44,6 @@ public class LiTeLLab {
 			//				<jar>
 			if (args.length == 0 || (args.length == 1 && args[0].equals("-h")))
 				System.out.println(help);
-			else if (args[0].equals("exam")) {
-				//			<Run Examination timetabling problem case study>
-				Exam exam1 = new Exam(4);
-				LiTeLLab.run(exam1.getOLTLScript(), "Exam4", exam1.getBound(), -1);
-				//			</Run Examination timetabling problem case study>
-			}
-			else if (args[0].equals("or")) {
-				//		<Run Operation room case study>
-				OperatingRoom or3 = new OperatingRoom(4, 9);
-				LiTeLLab.run(or3.getOLTLScript(), "OR4SR9", or3.getBound(), -1);
-				//		</Run Operation room case study>
-			}
-			//			else if (args[0].equals("al")) {
-			//				//		<Run Assembly line case study>
-			//				AssemblyLine al = new AssemblyLine(7);
-			//				LiTeLLab.run(al.getOLTLScript(), "AL7", 10, -1);
-			//				//		</Run Assembly line case study>
-			//			}
 			else {
 				String oltlScript = "";
 				try	{
@@ -114,14 +95,9 @@ public class LiTeLLab {
 			//			LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
 
 
-
-			//			List<String>[][] table = parseFile("OR_SN6_SR15_OR5.output.txt");
-			//	        printTable(table);
-			
-			writeToCSV(parseFile("output.txt"), "result.csv");
+//			writeToCSV(parseFile("output.txt"), "result.csv");
 			
 			boolean orScalability = false;
-//			boolean orScalability = true;
 			if (orScalability) {
 				for (int nSN = 4; nSN <= 15; nSN++) {
 //					OperatingRoomScAn or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN);
@@ -130,31 +106,7 @@ public class LiTeLLab {
 					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 3);					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 4);
 				}
 			}
-			//
-			//			OperatingRoom or = new OperatingRoom(4, 7);
-			//			LiTeLLab.run(or.getOLTLScript(), "OR4SR7", or.getBound());	
-			//			OperatingRoom or1 = new OperatingRoom(4, 8);
-			//			LiTeLLab.run(or1.getOLTLScript(), "OR4SR8", or1.getBound());
-			//			OperatingRoom or2 = new OperatingRoom(3, 7);
-			//			LiTeLLab.run(or2.getOLTLScript(), "OR3SR7", or2.getBound());
-			//			OperatingRoom or3 = new OperatingRoom(4, 9);
-			//			LiTeLLab.run(or3.getOLTLScript(), "OR4SR9", or3.getBound());
-			//			OperatingRoom or4 = new OperatingRoom(3, 8);
-			//			LiTeLLab.run(or4.getOLTLScript(), "OR3SR8", or4.getBound());
-			//			OperatingRoom or5 = new OperatingRoom(3, 9);
-			//			LiTeLLab.run(or5.getOLTLScript(), "OR3SR9", or5.getBound());
-			//
-			//			Exam exam = new Exam(3);
-			//			LiTeLLab.run(exam.getOLTLScript(), "Exam3", exam.getBound());
-			//			Exam exam1 = new Exam(4);
-			//			LiTeLLab.run(exam1.getOLTLScript(), "Exam4", exam1.getBound());
-			//
-			//			for (int setupDeadline = 1; setupDeadline <= 7; setupDeadline++) {
-			//				AssemblyLine al = new AssemblyLine(setupDeadline);
-			//				LiTeLLab.run(al.getOLTLScript(), "AL" + setupDeadline, 10);
-			//			}
 		}
-
 	}
 
 	public static void run(String script, int bound, int m) {
