@@ -1,0 +1,26 @@
+--- time 0 ---
+pp
+--- time 1 ---
+pp
+--- time 2 ---
+pp
+--- time 3 ---
+pp
+--- time 4 ---
+pp
+--- time 5 ---
+pp
+--- time 6 ---
+pp
+--- time 7 ---
+pp
+--- time 8 ---
+pp
+--- time 9 ---
+--- time 10 ---
+*LOOP*
+end
+
+ costHAvg 0
+ costLSum 1
+

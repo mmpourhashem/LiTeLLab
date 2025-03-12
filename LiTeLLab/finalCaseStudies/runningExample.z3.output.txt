@@ -1,0 +1,133 @@
+sat
+(
+  (define-fun otl_gt_x_2 () (_ BitVec 4)
+    #x0)
+  (define-fun bothReset () (_ BitVec 4)
+    #x5)
+  (define-fun otl6 () (_ BitVec 4)
+    #xf)
+  (define-fun otl4 () (_ BitVec 4)
+    #xf)
+  (define-fun w1bothReset () (_ BitVec 4)
+    #xf)
+  (define-fun i_loopInt () Int
+    1)
+  (define-fun iw1xGTy () (_ BitVec 4)
+    #xf)
+  (define-fun otl_eq_y_0 () (_ BitVec 4)
+    #xf)
+  (define-fun otl8 () (_ BitVec 4)
+    #x0)
+  (define-fun otl_eq_x_0 () (_ BitVec 4)
+    #x5)
+  (define-fun xGTy () (_ BitVec 4)
+    #xa)
+  (define-fun otl13 () (_ BitVec 4)
+    #x0)
+  (define-fun otl_leq_Old_x_2 () (_ BitVec 4)
+    #xf)
+  (define-fun otl_gt_x_y () (_ BitVec 4)
+    #xa)
+  (define-fun otl11 () (_ BitVec 4)
+    #xf)
+  (define-fun otl_gt_y_2 () (_ BitVec 4)
+    #x0)
+  (define-fun otl2 () (_ BitVec 4)
+    #xf)
+  (define-fun otl1 () (_ BitVec 4)
+    #x5)
+  (define-fun otl5 () (_ BitVec 4)
+    #xf)
+  (define-fun otl9 () (_ BitVec 4)
+    #x0)
+  (define-fun costHAvg () Real
+    3.0)
+  (define-fun otl7 () (_ BitVec 4)
+    #xf)
+  (define-fun costLSum () Real
+    0.0)
+  (define-fun otl15 () (_ BitVec 4)
+    #xf)
+  (define-fun otl14 () (_ BitVec 4)
+    #x0)
+  (define-fun otl10 () (_ BitVec 4)
+    #xf)
+  (define-fun i_loop () (_ BitVec 4)
+    #x1)
+  (define-fun otl3 () (_ BitVec 4)
+    #xf)
+  (define-fun otlDenom () Int
+    2)
+  (define-fun otl12 () (_ BitVec 4)
+    #xf)
+  (define-fun otl0 () (_ BitVec 4)
+    #xf)
+  (define-fun in_loop () (_ BitVec 4)
+    #xe)
+  (define-fun costHSum () Real
+    6.0)
+  (define-fun x ((x!0 Int)) Real (ite (= x!0 1) 0.1666666666? (ite (= x!0 3) 0.8333333333? 0.0)))
+  (define-fun Old_y ((x!0 Int)) Real (ite (= x!0 2) 1.3333333333? (ite (= x!0 3) 0.8333333333? (ite (= x!0 4) (- 5.0) 0.1666666666?))))
+  (define-fun otlRC_Old_x ((x!0 Int)) Bool (ite (= x!0 2) true false))
+  (define-fun /0 ((x!0 Real) (x!1 Real)) Real 3.0)
+  (define-fun otlRC_Delta ((x!0 Int)) Bool (ite (= x!0 2) true false))
+  (define-fun Old_x ((x!0 Int)) Real (ite (= x!0 2) 1.5 (ite (= x!0 3) 0.8333333333? (ite (= x!0 4) (- 4.1666666666?) 0.1666666666?))))
+  (define-fun otlLength ((x!0 Int)) Int (ite (= x!0 1) 2 0))
+  (define-fun y ((x!0 Int)) Real 0.0)
+  (define-fun otlDelta ((x!0 Int)) Real (ite (= x!0 1) 1.3333333333? (ite (= x!0 2) 0.8333333333? (ite (= x!0 3) (- 5.0) 0.1666666666?))))
+  (define-fun otlRC_Old_y ((x!0 Int)) Bool (ite (= x!0 2) true false))
+)
+(objectives
+ (costHAvg 3)
+ (costLSum 0)
+)
+(:added-eqs                       45869
+ :arith-eq-adapter                1486
+ :arith-assume-eqs                45
+ :arith-bound-propagations-lp     2534
+ :arith-branch                    362
+ :arith-conflicts                 524
+ :arith-cube-calls                90
+ :arith-diseq                     8355
+ :arith-fixed-eqs                 7119
+ :arith-gcd-calls                 363
+ :arith-grobner-calls             9
+ :arith-grobner-conflicts         7
+ :arith-horner-calls              9
+ :arith-horner-cross-nested-forms 38
+ :arith-lower                     16354
+ :arith-make-feasible             5619
+ :arith-max-columns               377
+ :arith-max-rows                  253
+ :arith-nla-explanations          343
+ :arith-nla-lemmas                48
+ :arith-offset-eqs                1904
+ :arith-patches                   363
+ :arith-patches-success           1
+ :arith-upper                     15409
+ :binary-propagations             31685
+ :bv-bit2core                     2880
+ :bv-diseqs                       133
+ :bv-dynamic-diseqs               79
+ :bv-dynamic-eqs                  3
+ :bv->core-eq                     15001
+ :conflicts                       593
+ :decisions                       3174
+ :del-clause                      4644
+ :final-checks                    459
+ :interface-eqs                   45
+ :max-memory                      53.82
+ :memory                          53.64
+ :minimized-lits                  262
+ :mk-bool-var                     7221
+ :mk-clause                       5842
+ :mk-clause-binary                1431
+ :num-allocs                      8154946
+ :num-checks                      15
+ :propagations                    66906
+ :restarts                        4
+ :rlimit-count                    1067590
+ :solve-eqs-elim-vars             17
+ :solve-eqs-steps                 190
+ :time                            0.51
+ :total-time                      0.52)

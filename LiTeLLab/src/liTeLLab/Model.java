@@ -193,7 +193,8 @@ public class Model {
 					continue;
 				String leqCMax = "(<= " + v.getAtTime(t) + " " + toReal(cMax) + ") ";
 				String newNotZero = "(not (= (" + v.getNameWOOld() + " " + t + ") 0.0)) ";
-				s += "\n(=> (and " + newNotZero + leqCMax + "(= " + v.getIntAtTime(t + 1) + " " + v.getIntAtTime(t) + ") " + v.getRCAtTime(t) + ") " + v.getRCAtTime(t + 1) + ")";
+//				@20250311 We decided to remove the following constraint because it is not necessary, since length cannot be negative and length(i)=RoundDelta(i+1)
+//				s += "\n(=> (and " + newNotZero + leqCMax + "(= " + v.getIntAtTime(t + 1) + " " + v.getIntAtTime(t) + ") " + v.getRCAtTime(t) + ") " + v.getRCAtTime(t + 1) + ")";
 				s += "\n(=> (and " + leqCMax + v.getFractionIsZeroAtTime(t) + ") (not " + v.getRCAtTime(t) + "))";
 			}
 			s += "\n(=> (= (to_int " + getDeltaAtTime(t - 1) + ") " + getDeltaAtTime(t - 1) + ") (not " + getRCDeltaAtTime(t) + "))"; //In the implementation, we always refer to small delta even for RCs. RCDelta(t) in the paper is equal to RCDelta(t-1) in the tool.

@@ -1,0 +1,61 @@
+--- time 0 ---
+m1w2cool4
+m2w2cool1
+m2
+powerw2cool2
+power
+m1
+otlLength = 2
+Old_x2 = 0.7778
+Old_x3 = 1261.7778
+x3 = 0
+x2 = 0
+x1 = 0
+Old_x1 = 1.2222
+otlDelta = 2
+--- time 1 ---
+*LOOP*
+otlLength = 2
+Old_x2 = 2
+Old_x3 = 2
+x3 = 0
+x2 = 0
+x1 = 0
+Old_x1 = 2
+otlDelta = 2.7778
+--- time 2 ---
+m2
+power
+otlLength = 2
+Old_x2 = 2.7778
+Old_x3 = 2.7778
+x3 = 0
+x2 = 0
+x1 = 2.7778
+Old_x1 = 2.7778
+otlDelta = 2
+--- time 3 ---
+otlLength = 2
+Old_x2 = 2
+Old_x3 = 2
+x3 = 0
+x2 = 0
+x1 = 4.7778
+Old_x1 = 4.7778
+otlDelta = 2.5556
+--- time 4 ---
+m2
+power
+m1
+otlLength = 2
+Old_x2 = 2.5556
+Old_x3 = 2.5556
+x3 = 0
+x2 = 0
+x1 = 0
+Old_x1 = 7.3333
+otlDelta = 2
+
+ costHAvg 1.25
+ costLSum 0
+

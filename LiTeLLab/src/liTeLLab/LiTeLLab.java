@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +42,6 @@ public class LiTeLLab {
 				+ "The main output that can be UNSAT or a trace with the total amount of cost in the end.\n	z3.input.smt2: The smt2 script prodcued "
 				+ "to be solved by Z3.\n	z3.output.smt2: The model prodcued by Z3.";
 		if (mode == 1) {
-			//				<jar>
 			if (args.length == 0 || (args.length == 1 && args[0].equals("-h")))
 				System.out.println(help);
 			else {
@@ -63,9 +63,9 @@ public class LiTeLLab {
 					e.printStackTrace();
 				}
 			}
-			//			//				</jar>
 		}
 		else if (mode == 2) {
+			int boundInMode2 = 4;
 
 			//			String runningExample;
 			//			runningExample = "(&& (next ([<] (-v- c1) (-v- c2))) (next  (next ([>] (-v- c1) (-v- c2))) ))";
@@ -86,13 +86,14 @@ public class LiTeLLab {
 			//					+ "(<-> (-P- light) (since (!! (-P- turnoff)) (-P- on)))  )))";
 			//			LiTeLLab.run(runningExample, "lamp", 10);
 
-			//			String oltlScript;
-			//			try {
-			//				oltlScript = new String (Files.readAllBytes(Paths.get("litellab.input.txt")));
-			//				LiTeLLab.run(oltlScript, boundInMode2, -1);
-			//			} catch (IOException e) {e.printStackTrace();}
-			//			AssemblyLine al = new AssemblyLine();
-			//			LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
+						String oltlScript;
+						try {
+							oltlScript = new String (Files.readAllBytes(Paths.get("litellab.input.txt")));
+							LiTeLLab.run(oltlScript, boundInMode2, -1);
+						} catch (IOException e) {e.printStackTrace();}
+						
+//						AssemblyLine al = new AssemblyLine();
+//						LiTeLLab.run(al.getOLTLScript(), "AL", 1, -1);
 
 
 //			writeToCSV(parseFile("output.txt"), "result.csv");
@@ -103,7 +104,8 @@ public class LiTeLLab {
 //					OperatingRoomScAn or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN);
 					OperatingRoomScAn or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 1);
 					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 2);
-					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 3);					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 4);
+					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 3);
+					or = new OperatingRoomScAn(nSN, (3 * nSN) - 3, nSN + 4);
 				}
 			}
 		}
@@ -114,29 +116,30 @@ public class LiTeLLab {
 	}
 
 	public static void run(String script, String testCase, int bound, int m) {
-		writeToFile(script, "");
-		//		SMT2Builder sb = new SMT2Builder(script, bound, m);
-		//		writeSMT2(sb.getSMT2Model());
-		//		parseOutput(sb.getModel(), testCase, false);
-		//		OLTLFormula.ltlInstances = new ArrayList<OLTLFormula>();
-		//		Predicate.instances = new HashSet<Predicate>();
-		//		Predicate.ltlInstances = new ArrayList<OLTLFormula>();
-		//		WAP.instances = new HashSet<WAP>();
-		//		WAP.ltlInstances = new ArrayList<OLTLFormula>();
-		//		// System.out.println(sb.getSMT2Model());
-		//		if (testCase.length() > 0) {
-		//			File z3Input = new File("./z3.input.smt2");
-		//			File z3InputNew = new File("./" + testCase + "-z3.input.smt2");
-		//			z3Input.renameTo(z3InputNew);
-		//			File z3Output = new File("./z3.output.txt");
-		//			File z3OutputNew = new File("./" + testCase + "-z3.output.txt");
-		//			z3Output.renameTo(z3OutputNew);
-		//			File file = new File("./" + testCase + "-litellab.output.txt");
-		//			file.delete();
-		//			File oltlOutput = new File("./litellab.output.txt");
-		//			File oltlOutputNew = new File("./" + testCase + "-litellab.output.txt");
-		//			oltlOutput.renameTo(oltlOutputNew);
-		//		}
+//		writeToFile(script, "");
+				SMT2Builder sb = new SMT2Builder(script, bound, m);
+				writeSMT2(sb.getSMT2Model());
+				parseOutput(sb.getModel(), testCase, false);
+
+				OLTLFormula.ltlInstances = new ArrayList<OLTLFormula>();
+				Predicate.instances = new HashSet<Predicate>();
+				Predicate.ltlInstances = new ArrayList<OLTLFormula>();
+				WAP.instances = new HashSet<WAP>();
+				WAP.ltlInstances = new ArrayList<OLTLFormula>();
+				// System.out.println(sb.getSMT2Model());
+				if (testCase.length() > 0) {
+					File z3Input = new File("./z3.input.smt2");
+					File z3InputNew = new File("./" + testCase + "-z3.input.smt2");
+					z3Input.renameTo(z3InputNew);
+					File z3Output = new File("./z3.output.txt");
+					File z3OutputNew = new File("./" + testCase + "-z3.output.txt");
+					z3Output.renameTo(z3OutputNew);
+					File file = new File("./" + testCase + "-litellab.output.txt");
+					file.delete();
+					File oltlOutput = new File("./litellab.output.txt");
+					File oltlOutputNew = new File("./" + testCase + "-litellab.output.txt");
+					oltlOutput.renameTo(oltlOutputNew);
+				}
 	}
 
 	public static void runFromFile() {
@@ -144,7 +147,7 @@ public class LiTeLLab {
 		StringBuilder script = new StringBuilder();
 		String ls = System.getProperty("line.separator");
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File("./oltl.input.txt")));
+			BufferedReader reader = new BufferedReader(new FileReader(new File("./litellab.input.txt")));
 			while ((line = reader.readLine()) != null) {
 				script.append(line);
 				script.append(ls);

@@ -1,0 +1,167 @@
+--- time 0 ---
+somePlant42
+somePlant1
+somePlant6
+winter
+somePlant4
+somePlant5
+rest
+somePlant3
+somePlant12
+somePlant62
+somePlant52
+x = 2
+Old_plant = 1
+plant = 0
+Old_x = 2
+otlLength = 1
+otlDelta = 1
+--- time 1 ---
+*LOOP*
+plant1
+spring
+newSeason
+loops
+x = 0
+Old_plant = 1
+plant = 0
+Old_x = 3
+otlLength = 3
+otlDelta = 3
+--- time 2 ---
+summer
+newSeason
+plant4
+x = 0
+Old_plant = 3
+plant = 0
+Old_x = 3
+otlLength = 2
+otlDelta = 2
+--- time 3 ---
+plant3
+summer
+x = 2
+Old_plant = 2
+plant = 0
+Old_x = 2
+otlLength = 1
+otlDelta = 1
+--- time 4 ---
+autumn
+plant3
+newSeason
+x = 0
+Old_plant = 1
+plant = 1
+Old_x = 3
+otlLength = 1
+otlDelta = 1
+--- time 5 ---
+autumn
+plant6
+x = 1
+Old_plant = 2
+plant = 0
+Old_x = 1
+otlLength = 1
+otlDelta = 1
+--- time 6 ---
+plant5
+autumn
+x = 2
+Old_plant = 1
+plant = 0
+Old_x = 2
+otlLength = 1
+otlDelta = 1
+--- time 7 ---
+plant5
+winter
+newSeason
+x = 0
+Old_plant = 1
+plant = 1
+Old_x = 3
+otlLength = 3
+otlDelta = 3
+--- time 8 ---
+rest
+spring
+newSeason
+x = 0
+Old_plant = 4
+plant = 0
+Old_x = 3
+otlLength = 1
+otlDelta = 1
+--- time 9 ---
+plant1
+spring
+x = 1
+Old_plant = 1
+plant = 0
+Old_x = 1
+otlLength = 2
+otlDelta = 2
+--- time 10 ---
+plant1
+summer
+newSeason
+x = 0
+Old_plant = 2
+plant = 2
+Old_x = 3
+otlLength = 1
+otlDelta = 1
+--- time 11 ---
+summer
+plant4
+x = 1
+Old_plant = 3
+plant = 0
+Old_x = 1
+otlLength = 2
+otlDelta = 2
+--- time 12 ---
+autumn
+plant6
+newSeason
+x = 0
+Old_plant = 2
+plant = 0
+Old_x = 3
+otlLength = 1
+otlDelta = 1
+--- time 13 ---
+plant5
+autumn
+x = 1
+Old_plant = 1
+plant = 0
+Old_x = 1
+otlLength = 2
+otlDelta = 2
+--- time 14 ---
+plant5
+winter
+newSeason
+x = 0
+Old_plant = 2
+plant = 2
+Old_x = 3
+otlLength = 2
+otlDelta = 2
+--- time 15 ---
+winter
+rest
+x = 2
+Old_plant = 4
+plant = 0
+Old_x = 2
+otlLength = 1
+otlDelta = 1
+
+ costHAvg 0
+ costLSum 31.3
+

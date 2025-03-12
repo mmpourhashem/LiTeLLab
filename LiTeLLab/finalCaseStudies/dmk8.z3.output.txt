@@ -1,0 +1,257 @@
+sat
+(
+  (define-fun otl_eq_x1_0 () (_ BitVec 10)
+    #b1111011111)
+  (define-fun otl27 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun high1 () (_ BitVec 10)
+    #b0000110001)
+  (define-fun otl5 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun iw1high2 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl_gt_Old_x1_3 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl49 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl43 () (_ BitVec 10)
+    #b1111111110)
+  (define-fun otl_gt_x2_6 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun low2 () (_ BitVec 10)
+    #b0001100000)
+  (define-fun i_loopInt () Int
+    2)
+  (define-fun otl22 () (_ BitVec 10)
+    #b0000010000)
+  (define-fun otl_gt_Old_x2_6 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun att1 () (_ BitVec 10)
+    #b0000010001)
+  (define-fun att () (_ BitVec 10)
+    #b0010010000)
+  (define-fun otl_eq_x2_0 () (_ BitVec 10)
+    #b0011100001)
+  (define-fun otl16 () (_ BitVec 10)
+    #b1111100111)
+  (define-fun otl52 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl_eq_Old_x2_6 () (_ BitVec 10)
+    #b0000100000)
+  (define-fun low1 () (_ BitVec 10)
+    #b1111001110)
+  (define-fun otl_gt_y_6 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl59 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl_geq_Old_y_4 () (_ BitVec 10)
+    #b0010010000)
+  (define-fun otl_lt_x1_3 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl_lt_x2_6 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl_gt_x1_6 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl47 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl20 () (_ BitVec 10)
+    #b0000110000)
+  (define-fun otl_eq_Old_x1_3 () (_ BitVec 10)
+    #b0101000011)
+  (define-fun high2 () (_ BitVec 10)
+    #b1110011111)
+  (define-fun att2 () (_ BitVec 10)
+    #b0010000001)
+  (define-fun otl54 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl57 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl_eq_y_0 () (_ BitVec 10)
+    #b0010010001)
+  (define-fun iw1high1 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl2 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl18 () (_ BitVec 10)
+    #b0010100001)
+  (define-fun otl44 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl42 () (_ BitVec 10)
+    #b1111111110)
+  (define-fun otl36 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl53 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl10 () (_ BitVec 10)
+    #b0001100010)
+  (define-fun otl56 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl3 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl48 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun costLSum () Real
+    0.0)
+  (define-fun otl29 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl19 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl28 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl31 () (_ BitVec 10)
+    #b1111011111)
+  (define-fun otl50 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl55 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl39 () (_ BitVec 10)
+    #b0000000001)
+  (define-fun otl40 () (_ BitVec 10)
+    #b1111111110)
+  (define-fun otl35 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl33 () (_ BitVec 10)
+    #b0011100001)
+  (define-fun in_loop () (_ BitVec 10)
+    #b1111111100)
+  (define-fun otl41 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl61 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl4 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl38 () (_ BitVec 10)
+    #b1111111110)
+  (define-fun otl11 () (_ BitVec 10)
+    #b0001110011)
+  (define-fun otl7 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl15 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl37 () (_ BitVec 10)
+    #b0010010001)
+  (define-fun otl8 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun i_loop () (_ BitVec 10)
+    #b0000000010)
+  (define-fun costHAvg () Real
+    1.34375)
+  (define-fun otl24 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl6 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl32 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl23 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl58 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otlDenom () Int
+    8)
+  (define-fun otl9 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun costHSum () Real
+    10.75)
+  (define-fun otl14 () (_ BitVec 10)
+    #b1110111111)
+  (define-fun otl21 () (_ BitVec 10)
+    #b0000010000)
+  (define-fun otl25 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl17 () (_ BitVec 10)
+    #b0000100001)
+  (define-fun otl13 () (_ BitVec 10)
+    #b1100111110)
+  (define-fun otl60 () (_ BitVec 10)
+    #b0000000000)
+  (define-fun otl45 () (_ BitVec 10)
+    #b0000000001)
+  (define-fun otl30 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl12 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl34 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl0 () (_ BitVec 10)
+    #b0000110001)
+  (define-fun otl26 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl1 () (_ BitVec 10)
+    #b1110011111)
+  (define-fun otl51 () (_ BitVec 10)
+    #b1111111111)
+  (define-fun otl46 () (_ BitVec 10)
+    #b0000000001)
+  (define-fun Old_y ((x!0 Int)) Real (ite (= x!0 0) 0.9 (ite (= x!0 2) 3.2 (ite (= x!0 3) 3.6 (ite (= x!0 4) 4.0 (ite (= x!0 5) 2.0 (ite (= x!0 7) 4.1 (ite (= x!0 9) 3.5 (ite (= x!0 10) 3.5 3.0)))))))))
+  (define-fun otlDelta ((x!0 Int)) Real (ite (= x!0 0) 3.0 (ite (= x!0 1) 0.2 (ite (= x!0 4) 2.0 (ite (= x!0 5) 1.0 (ite (= x!0 6) 1.1 (ite (= x!0 7) 3.0 (ite (= x!0 8) 0.5 (ite (= x!0 9) 0.0 0.4)))))))))
+  (define-fun otlRC_Old_x2 ((x!0 Int)) Bool false)
+  (define-fun otlRC_Old_y ((x!0 Int)) Bool (ite (= x!0 0) true false))
+  (define-fun Old_x2 ((x!0 Int)) Real (ite (= x!0 1) 3.0 (ite (= x!0 2) 3.2 (ite (= x!0 3) 3.6 (ite (= x!0 4) 4.0 (ite (= x!0 5) 6.0 (ite (= x!0 7) 1.1 (ite (= x!0 8) 3.0 (ite (= x!0 9) 3.5 (ite (= x!0 10) 3.5 1.0))))))))))
+  (define-fun otlRC_Old_x1 ((x!0 Int)) Bool (ite (= x!0 4) true false))
+  (define-fun otlRC_Delta ((x!0 Int)) Bool (ite (= x!0 4) true false))
+  (define-fun /0 ((x!0 Real) (x!1 Real)) Real 1.34375)
+  (define-fun x2 ((x!0 Int)) Real (ite (= x!0 1) 3.0 (ite (= x!0 2) 3.2 (ite (= x!0 3) 3.6 (ite (= x!0 4) 4.0 (ite (= x!0 8) 3.0 (ite (= x!0 9) 3.5 0.0)))))))
+  (define-fun otlLength ((x!0 Int)) Int (ite (= x!0 6) 1 (ite (= x!0 7) 3 (ite (= x!0 5) 1 (ite (= x!0 4) 2 (ite (= x!0 3) 1 (ite (= x!0 0) 3 0)))))))
+  (define-fun y ((x!0 Int)) Real (ite (= x!0 1) 3.0 (ite (= x!0 2) 3.2 (ite (= x!0 3) 3.6 (ite (= x!0 5) 2.0 (ite (= x!0 6) 3.0 (ite (= x!0 8) 3.0 (ite (= x!0 9) 3.5 0.0))))))))
+  (define-fun Old_x1 ((x!0 Int)) Real (ite (= x!0 2) 0.2 (ite (= x!0 3) 0.4 (ite (= x!0 4) 0.4 (ite (= x!0 5) 2.0 (ite (= x!0 7) 1.1 (ite (= x!0 9) 0.5 (ite (= x!0 10) 0.0 3.0))))))))
+  (define-fun x1 ((x!0 Int)) Real (ite (= x!0 5) 2.0 0.0))
+)
+(objectives
+ (costHAvg 1.34375)
+ (costLSum 0)
+)
+(:added-eqs                       8008268
+ :arith-eq-adapter                14022
+ :arith-assume-eqs                132
+ :arith-bound-propagations-lp     484718
+ :arith-branch                    26
+ :arith-conflicts                 7355
+ :arith-cube-calls                7
+ :arith-diseq                     2241505
+ :arith-fixed-eqs                 1081163
+ :arith-gcd-calls                 44
+ :arith-gcd-conflict              12
+ :arith-gomory-cuts               4
+ :arith-grobner-calls             29
+ :arith-grobner-conflicts         26
+ :arith-hnf-calls                 1
+ :arith-horner-calls              30
+ :arith-horner-conflicts          1
+ :arith-horner-cross-nested-forms 318
+ :arith-lower                     2947330
+ :arith-make-feasible             157725
+ :arith-max-columns               2929
+ :arith-max-rows                  2564
+ :arith-nla-explanations          2988
+ :arith-nla-lemmas                219
+ :arith-offset-eqs                777003
+ :arith-patches                   32
+ :arith-patches-success           2
+ :arith-upper                     3162490
+ :binary-propagations             5608949
+ :bv-bit2core                     404842
+ :bv-diseqs                       1290
+ :bv-dynamic-diseqs               3453
+ :bv-dynamic-eqs                  6816
+ :bv->core-eq                     1777981
+ :conflicts                       14391
+ :decisions                       69799
+ :del-clause                      182308
+ :dyn-ack                         1
+ :final-checks                    369
+ :interface-eqs                   132
+ :max-memory                      182.78
+ :memory                          158.42
+ :minimized-lits                  110329
+ :mk-bool-var                     365403
+ :mk-clause                       197010
+ :mk-clause-binary                10342
+ :num-allocs                      31003952122.00
+ :num-checks                      33
+ :propagations                    21828396
+ :restarts                        104
+ :rlimit-count                    240412770
+ :solve-eqs-elim-vars             53
+ :solve-eqs-steps                 636
+ :time                            764.80
+ :total-time                      764.94)
