@@ -124,9 +124,13 @@ public class Model {
 			deltaGTZ += "\n(>= (" + prefix + "Length " + t + ") 0) (<= (" + prefix + "Length " + t + ") " + m + ")";
 		}
 		for (Variable v : Variable.instances)
-			for (int t = 0; t <= bound + 1; t++)
+			for (int t = 0; t <= bound + 1; t++) {
+				String op = ">=";
+				if (t == 0)
+					op = "=";
 				if (! v.getName().startsWith("Old_"))
-					s += "\n(>= " + v.getAtTime(t) + " 0.0)";
+					s += "\n(" + op + " " + v.getAtTime(t) + " 0.0)";
+			}
 		for (Variable v : Variable.instances)
 			for (int t = 0; t <= bound + 1; t++) {
 				if (! v.getName().startsWith("Old_"))
