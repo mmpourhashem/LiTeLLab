@@ -4,7 +4,7 @@ The tool LiTeLLab supports encodings for OLTL OCLTLoc. For OLTL specifications, 
 
 ## Getting Started
 
-1. Ensure you have Java installed and [Z3](https://github.com/Z3Prover/z3) configured on your machine.
+1. Ensure you have Java installed and [Z3](https://github.com/Z3Prover/z3) configured on your machine. (Note that the path to the installed Z3 must be updated in the runZ3.sh or runZ3.bat files.)
 2. Clone the LiTeLLab repository:
 
    ```bash

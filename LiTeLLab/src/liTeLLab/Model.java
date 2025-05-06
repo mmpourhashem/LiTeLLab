@@ -127,7 +127,7 @@ public class Model {
 			for (int t = 0; t <= bound + 1; t++) {
 				String op = ">=";
 				if (t == 0)
-					op = "=";
+					op = "=";//@20250316 we decided to have all clocks reset at position 0.
 				if (! v.getName().startsWith("Old_"))
 					s += "\n(" + op + " " + v.getAtTime(t) + " 0.0)";
 			}
